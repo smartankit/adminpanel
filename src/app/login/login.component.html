@@ -1,0 +1,44 @@
+<app-toast [message]="toast.message"></app-toast>
+<div class="login-page">
+  <div class="row">
+      <div class="col-md-4 push-md-4">
+          <img src="assets/images/logo.png" width="150px" class="user-avatar" />
+          <h1>Admin Panel</h1>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+              <div class="form-content">
+                <div class="input-group" [ngClass]="setClassEmail()">
+                  <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                  <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email" autofocus>
+                </div>
+                <div class="input-group" [ngClass]="setClassPassword()">
+                  <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                  <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
+                </div>
+              </div>
+              <button class="btn rounded-btn" type="submit" [disabled]="!loginForm.valid"><i class="fa fa-sign-in"></i> Login</button>
+              &nbsp;
+              <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
+          </form>
+      </div>
+  </div>
+</div>
+
+
+
+
+<!-- <div class="card">
+  <h4 class="card-header">Login</h4>
+  <div class="card-block">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="input-group" [ngClass]="setClassEmail()">
+        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email" autofocus>
+      </div>
+      <div class="input-group" [ngClass]="setClassPassword()">
+        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+        <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid"><i class="fa fa-sign-in"></i> Login</button>
+    </form>
+  </div>
+</div> -->
