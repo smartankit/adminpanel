@@ -12,6 +12,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { UserService } from './services/user.service';
+//import { UserlistModule } from './userlist/userlist.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -23,12 +24,14 @@ export function HttpLoaderFactory(http: Http) {
     declarations: [
         AppComponent,
         LogoutComponent
+        
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
+      //  UserlistModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {
