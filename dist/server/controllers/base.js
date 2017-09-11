@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var BaseCtrl = /** @class */ (function () {
+var BaseCtrl = (function () {
     function BaseCtrl() {
         var _this = this;
         // Get all
@@ -65,5 +64,6 @@ var BaseCtrl = /** @class */ (function () {
     }
     return BaseCtrl;
 }());
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = BaseCtrl;
 //# sourceMappingURL=base.js.map

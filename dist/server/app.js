@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var bodyParser = require("body-parser");
 var dotenv = require("dotenv");
 var express = require("express");

@@ -13,6 +13,7 @@ import { routerTransition } from '../router.animations';
 export class UserListComponent implements OnInit {
 
   users = [];
+  selecteduser=[];
   isLoading = true;
 
   constructor(public auth: AuthService,
@@ -30,7 +31,13 @@ export class UserListComponent implements OnInit {
       () => this.isLoading = false
     );
   }
-
+  getUser(user) {
+    this.userService.getUser(user).subscribe(
+      data => this.selecteduser = data,
+      error => console.log(error),
+      () => this.isLoading = false
+    );
+  }
   deleteUser(user) {
     this.userService.deleteUser(user).subscribe(
       data => this.toast.setMessage('user deleted successfully.', 'success'),
