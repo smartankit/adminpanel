@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col col-xl-12 col-lg-12">
+    <app-toast [message]="toast.message"></app-toast>
+    <app-page-header [heading]="'UserList'" [icon]="'fa-user'"></app-page-header>
+    <app-loading [condition]="isLoading"></app-loading>
+
+
+
+
+    <div class="card" *ngIf="!isLoading" [@routerTransition]>
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <a class="navbar-brand" href="#">Registered users ({{users.length}})</a>
+
+        <div class="rightdata">
+          <div class=" ">
+            <a [routerLink]="['/account']" class="rightdata" [routerLinkActive]="['router-link-active']">  <i class="fa fa-user-plus" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </nav>
+
+
+
+      <div class="card-block table-responsive ">
+        <table class="table">
+          <thead class="table table-hover table-striped">
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="users.length === 0">
+            <tr>
+              <td colspan="4">There are no registered users.</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{user.username}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.role}}</td>
+              <td>
+                <button class="btn btn-sm btn-danger" (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
+              <i class="fa fa-trash"></i>
+            </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

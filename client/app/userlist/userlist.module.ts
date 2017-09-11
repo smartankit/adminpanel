@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/toast/shared.module';
-import { UserlistComponent } from './userlist.component';
+import { UserListComponent } from './userlist.component';
 import { UserlistRoutingModule } from './userlist-routing.module';
+import { PageHeaderModule } from '../shared';
+
 @NgModule({
   imports: [
     CommonModule,
+    PageHeaderModule,
     SharedModule,
     UserlistRoutingModule
   ],
-  declarations: [UserlistComponent]
+  declarations: [UserListComponent]
 })
 export class UserlistModule { }

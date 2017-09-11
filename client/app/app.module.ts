@@ -7,12 +7,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-//import { AuthGuard } from './shared';
+
 import { LogoutComponent } from './logout/logout.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { UserService } from './services/user.service';
-//import { UserlistModule } from './userlist/userlist.module';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -31,7 +31,6 @@ export function HttpLoaderFactory(http: Http) {
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-      //  UserlistModule,
         AppRoutingModule,
         TranslateModule.forRoot({
             loader: {

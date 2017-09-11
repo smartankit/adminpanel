@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
-
+import { routerTransition } from '../router.animations';
 @Component({
   selector: 'app-admin',
   templateUrl: './userlist.component.html',
-  styleUrls: ['./userlist.component.scss']
+  styleUrls: ['./userlist.component.css'],
+  animations: [routerTransition()]
 })
-export class UserlistComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
   users = [];
   isLoading = true;

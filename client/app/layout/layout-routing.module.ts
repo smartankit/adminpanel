@@ -7,7 +7,8 @@ const routes: Routes = [
         path: '', component: LayoutComponent,
         children: [
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'userlist', loadChildren: './userlist/userlist.module#UserlistModule' },
+            { path: 'userlist', loadChildren: '../userlist/userlist.module#UserlistModule' },
+            { path: 'account', loadChildren: '../account/account.module#AccountModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
