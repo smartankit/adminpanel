@@ -7,7 +7,7 @@ import { PageHeaderModule } from '../shared';
 import {DialogModule,ButtonModule} from 'primeng/primeng';
 import { EdituserComponent } from '.././userlist/edituser/edituser.component';
 import { AdduserComponent } from '.././userlist/adduser/adduser.component';
-
+import { MangeroleService } from '../services/mangerole.service';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +20,7 @@ import { AdduserComponent } from '.././userlist/adduser/adduser.component';
     
     
   ],
+  providers:[MangeroleService],
   declarations: [UserListComponent, EdituserComponent, AdduserComponent]
 })
 export class UserlistModule { }

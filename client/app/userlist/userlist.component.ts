@@ -4,7 +4,7 @@ import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { routerTransition } from '../router.animations';
-
+import { MangeroleService } from '../services/mangerole.service';
 
 @Component({
   selector: 'app-admin',
@@ -18,15 +18,23 @@ export class UserListComponent implements OnInit {
   user = {};
   selecteduser = [];
   isLoading = true;
-
+  roles=[];
   constructor(public auth: AuthService,
     public toast: ToastComponent,
-    private userService: UserService) { }
+    private userService: UserService,private roleService: MangeroleService) { }
 
   ngOnInit() {
     this.getUsers();
+    this.getRoles();
   }
-
+  //get all  user details
+  getRoles() {
+    this.roleService.getRoles().subscribe(
+      data => this.roles = data,
+      error => console.log(error),
+      () => this.isLoading = false
+    );
+  }
 
 
 

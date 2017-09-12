@@ -5,6 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { routerTransition } from '../../router.animations';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { MangeroleService } from '../../services/mangerole.service';
 @Component({
   selector: 'app-edituser',
   templateUrl: './edituser.component.html',
@@ -13,7 +14,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class EdituserComponent implements OnInit {
 
   user = [];
-  
+  roles=[];
   selecteduser = [];
   isLoading = true;
   isEditing = false;
@@ -34,8 +35,9 @@ export class EdituserComponent implements OnInit {
                private router: Router,
                private route: ActivatedRoute,
               public toast: ToastComponent,
-              private userService: UserService) { }
+              private userService: UserService,private roleService: MangeroleService) { }
   ngOnInit() {
+    this.getRoles();
     var id=this.route.params['_value'].id;
     this.getUserSelected(id);
     this.editForm = this.formBuilder.group({
@@ -43,6 +45,16 @@ export class EdituserComponent implements OnInit {
       email: this.email,
       role: this.role
     });
+  }
+
+
+  //get all  user details
+  getRoles() {
+    this.roleService.getRoles().subscribe(
+      data => this.roles = data,
+      error => console.log(error),
+      () => this.isLoading = false
+    );
   }
   setClassUsername() {
     return { 'has-danger': !this.username.pristine && !this.username.valid };
