@@ -48,12 +48,12 @@
                 <button class="btn btn-sm btn-danger" (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
               <i class="fa fa-trash"></i>
             </button>
-            <button class="btn btn-sm btn-success" (click)="getUser(user)" >
+                <button class="btn btn-sm btn-success" (click)="getUser(user)">
               <i class="fa fa-eye"></i>
             </button>
-          
+
               </td>
-             
+
             </tr>
           </tbody>
         </table>
@@ -61,3 +61,36 @@
     </div>
   </div>
 </div>
+
+<p-dialog header="User Information" [(visible)]="display" modal="modal" width="500" [responsive]="true" >
+   <app-loading [condition]="isLoading"></app-loading>
+  <div class="card-block table-responsive " [@routerTransition]>
+    <table class="table">
+      <thead class="table table-hover table-striped">
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Role</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>{{selecteduser.username}}</td>
+          <td>{{selecteduser.email}}</td>
+          <td>{{selecteduser.role}}</td>
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p-footer>
+
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="Close"></button>
+  </p-footer>
+</p-dialog>
+
+<button type="button" (click)="showDialog()" pButton icon="fa-external-link-square" label="Show"></button>
