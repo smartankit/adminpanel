@@ -1,3 +1,40 @@
-<p>
-  rolemanage works!
-</p>
+<div class="row">
+  <div class="col col-xl-6 col-lg-6">
+  
+    <app-page-header [heading]="'User Role'" [icon]="'fa-user'"></app-page-header>
+    <app-loading [condition]="isLoading"></app-loading>
+
+
+
+
+    <div class="card" *ngIf="!isLoading" [@routerTransition]>
+     
+
+
+      <div class="card-block table-responsive ">
+        <table class="table">
+          <thead class="table table-hover table-striped">
+            <tr>
+              <th>Role Name</th>
+           
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="roles.length === 0">
+            <tr>
+              <td colspan="4">There are no roles list.</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr *ngFor="let role of roles">
+              <td>{{role.name}}</td>
+             
+             
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
