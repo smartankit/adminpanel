@@ -2,15 +2,17 @@ import * as express from 'express';
 
 import CatCtrl from './controllers/cat';
 import UserCtrl from './controllers/user';
+import RoleCtrl from './controllers/role';
 import Cat from './models/cat';
 import User from './models/user';
-
+import Role from './models/role';
 export default function setRoutes(app) {
 
   const router = express.Router();
 
   const catCtrl = new CatCtrl();
   const userCtrl = new UserCtrl();
+  const roleCtrl = new RoleCtrl();
 
   // Cats
   router.route('/cats').get(catCtrl.getAll);
@@ -28,6 +30,15 @@ export default function setRoutes(app) {
   router.route('/user/:id').get(userCtrl.get);
   router.route('/user/:id').put(userCtrl.update);
   router.route('/user/:id').delete(userCtrl.delete);
+
+
+// User Role
+router.route('/roles').get(roleCtrl.getAll);
+router.route('/roles/count').get(roleCtrl.count);
+router.route('/role').post(roleCtrl.insert);
+router.route('/role/:id').get(roleCtrl.get);
+router.route('/role/:id').put(roleCtrl.update);
+router.route('/role/:id').delete(roleCtrl.delete);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LogoutComponent } from './logout/logout.component';
+import { RolemanageComponent } from './rolemanage/rolemanage.component';
 
 //import { AuthGuard } from './shared';
 //import { AuthGuardLogin } from './services/auth-guard-login.service';
@@ -13,6 +14,7 @@ const routes: Routes = [
     },
     
     { path: 'logout', component: LogoutComponent },
+    { path: 'rolemanage',loadChildren:'./rolemanage/rolemanage.module#RolemanageModule'},
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'userlist', loadChildren: './userlist/userlist.module#UserlistModule' },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
