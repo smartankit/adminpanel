@@ -5,6 +5,7 @@ import { UserListComponent } from './userlist.component';
 import { UserlistRoutingModule } from './userlist-routing.module';
 import { PageHeaderModule } from '../shared';
 import {DialogModule,ButtonModule} from 'primeng/primeng';
+import { EdituserComponent } from '.././userlist/edituser/edituser.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import {DialogModule,ButtonModule} from 'primeng/primeng';
     
     
   ],
-  declarations: [UserListComponent]
+  declarations: [UserListComponent, EdituserComponent]
 })
 export class UserlistModule { }

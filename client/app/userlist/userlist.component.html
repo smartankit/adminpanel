@@ -46,12 +46,16 @@
               <td>{{user.role}}</td>
               <td>
                 <button class="btn btn-sm btn-danger" (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
-              <i class="fa fa-trash"></i>
+              <i class="fa fa-trash"></i>Delete
             </button>
-                <button class="btn btn-sm btn-success" (click)="getUser(user)">
-              <i class="fa fa-eye"></i>
+                <button class="btn btn-sm btn-primary" (click)="getUser(user)">
+              <i class="fa fa-eye"></i>View
             </button>
-
+            <button class="btn btn-sm btn-warning" [routerLink]="['/userlist/edituser', user._id]" routerLinkActive="active">
+            
+        <i class="fa fa-pencil-square-o"></i>Edit
+           
+              </button>
               </td>
 
             </tr>
@@ -62,8 +66,8 @@
   </div>
 </div>
 
-<p-dialog header="User Information" [(visible)]="display" modal="modal" width="500" [responsive]="true" >
-   <app-loading [condition]="isLoading"></app-loading>
+<p-dialog header="User Information" [(visible)]="display" modal="modal" width="500" [responsive]="true">
+  <app-loading [condition]="isLoading"></app-loading>
   <div class="card-block table-responsive " [@routerTransition]>
     <table class="table">
       <thead class="table table-hover table-striped">
@@ -92,5 +96,3 @@
     <button type="button" pButton icon="fa-close" (click)="display=false" label="Close"></button>
   </p-footer>
 </p-dialog>
-
-<button type="button" (click)="showDialog()" pButton icon="fa-external-link-square" label="Show"></button>

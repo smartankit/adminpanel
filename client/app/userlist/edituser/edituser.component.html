@@ -1,7 +1,7 @@
 <app-loading [condition]="isLoading"></app-loading>
 
 <app-toast [message]="toast.message"></app-toast>
-<app-page-header [heading]="'Add User'" [icon]="'fa-user'"></app-page-header>
+<app-page-header [heading]="'Edit User'" [icon]="'fa-user'"></app-page-header>
 
  <div class="row">
 
@@ -10,41 +10,36 @@
     <div class="card">
 
       <div class="formGroup">
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <form [formGroup]="editForm" (ngSubmit)="save(user)">
 
 
           <fieldset class="form-group">
             <div class="input-group" [ngClass]="setClassUsername()">
               <span class="input-group-addon"><i class="fa fa-user"></i></span>
-              <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus>
+              <input class="form-control" type="text" name="username" [(ngModel)]="user.username" formControlName="username" placeholder="Username" autofocus>
             </div>
           </fieldset>
 
 
-          <fieldset class="form-group">
+          <fieldset class="form-group" [ngClass]="setClassEmail()">
 
-            <div class="input-group" [ngClass]="setClassEmail()">
+            <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-              <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email">
+              <input class="form-control" type="email" name="email" [(ngModel)]="user.email" formControlName="email" placeholder="Email">
             </div>
           </fieldset>
-          <fieldset class="form-group">
-            <div class="input-group" [ngClass]="setClassPassword()">
-              <span class="input-group-addon"><i class="fa fa-key"></i></span>
-              <input class="form-control" type="password" name="password" formControlName="password" placeholder="Password">
-            </div>
-          </fieldset>
+         
           <fieldset class="form-group">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
-              <select class="form-control" name="role" formControlName="role">
+              <select class="form-control" name="role" [(ngModel)]="user.role" formControlName="role">
           <option value="" selected disabled>Role</option>
           <option value="user">User</option>
           <option value="admin">Admin</option>
         </select>
             </div>
           </fieldset>
-          <button class="btn btn-primary" type="submit" [disabled]="!registerForm.valid"><i class="fa fa-user-plus"></i> Register</button>
+          <button class="btn btn-primary" type="submit" [disabled]="!editForm.valid"><i class="fa fa-user-plus"></i> Update</button>
           <a [routerLink]="['/userlist']" class="btn btn-primary" >  <i class="fa fa-arrow-left" aria-hidden="true"></i>Back</a>
           
         </form>

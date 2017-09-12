@@ -35,7 +35,10 @@ export class UserService {
   getUser(user): Observable<any> {
     return this.http.get(`/api/user/${user._id}`).map(res => res.json());
   }
-
+  
+  getUserSelected(id): Observable<any> {
+    return this.http.get(`/api/user/${id}`).map(res => res.json());
+  }
   editUser(user): Observable<any> {
     return this.http.put(`/api/user/${user._id}`, JSON.stringify(user), this.options);
   }
