@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit {
   user = {};
   selecteduser = [];
   isLoading = true;
-  isEditing = false;
+
   constructor(public auth: AuthService,
     public toast: ToastComponent,
     private userService: UserService) { }
@@ -27,18 +27,7 @@ export class UserListComponent implements OnInit {
     this.getUsers();
   }
 
-  enableEditing(cat) {
-    this.isEditing = true;
-    this.user = cat;
-  }
 
-  cancelEditing() {
-    this.isEditing = false;
-    this.user = {};
-    this.toast.setMessage('item editing cancelled.', 'warning');
-    // reload the cats to reset the editing
-    this.getUsers();
-  }
 
 
   //get all  user details
@@ -54,6 +43,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUser(user).subscribe(
 
       (data) => {
+      
         this.selecteduser = data;
         this.showDialog();
         //this.refresh() should work here
@@ -63,7 +53,7 @@ export class UserListComponent implements OnInit {
       () => this.isLoading = false
     );
   }
-    //delete all user details
+  //delete all user details
   deleteUser(user) {
     this.userService.deleteUser(user).subscribe(
       data => this.toast.setMessage('user deleted successfully.', 'success'),
@@ -72,16 +62,7 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  editUser(user) {
-    this.userService.editUser(user).subscribe(
-      res => {
-        this.isEditing = false;
-        this.user = user;
-        this.toast.setMessage('user edited successfully.', 'success');
-      },
-      error => console.log(error)
-    );
-  }
+
   display: boolean = false;
 
   showDialog() {

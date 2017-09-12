@@ -6,6 +6,7 @@ import { UserlistRoutingModule } from './userlist-routing.module';
 import { PageHeaderModule } from '../shared';
 import {DialogModule,ButtonModule} from 'primeng/primeng';
 import { EdituserComponent } from '.././userlist/edituser/edituser.component';
+import { AdduserComponent } from '.././userlist/adduser/adduser.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { EdituserComponent } from '.././userlist/edituser/edituser.component';
     
     
   ],
-  declarations: [UserListComponent, EdituserComponent]
+  declarations: [UserListComponent, EdituserComponent, AdduserComponent]
 })
 export class UserlistModule { }

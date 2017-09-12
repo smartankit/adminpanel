@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { ToastComponent } from '../shared/toast/toast.component';
+import { UserService } from '../../services/user.service';
+import { ToastComponent } from '../../shared/toast/toast.component';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  selector: 'app-adduser',
+  templateUrl: './adduser.component.html',
+  styleUrls: ['./adduser.component.scss']
 })
-export class AccountComponent implements OnInit {
+export class AdduserComponent implements OnInit {
 
   registerForm: FormGroup;
   username = new FormControl('', [Validators.required,

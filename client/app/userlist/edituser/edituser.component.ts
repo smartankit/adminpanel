@@ -65,6 +65,8 @@ export class EdituserComponent implements OnInit {
       () => this.isLoading = false
     );
   }
+ 
+//update user form
 
   save(user) {
     this.userService.editUser(user).subscribe(
