@@ -4,11 +4,12 @@ import CatCtrl from './controllers/cat';
 import UserCtrl from './controllers/user';
 import RoleCtrl from './controllers/role';
 import ModulelistCtrl from './controllers/modulelist';
-
+import ModuleroleCtrl from './controllers/modulerole';
 import Cat from './models/cat';
 import User from './models/user';
 import Role from './models/role';
 import Modulelist from './models/modulelist';
+import Modulerole from './models/modulerole';
 export default function setRoutes(app) {
 
   const router = express.Router();
@@ -17,6 +18,7 @@ export default function setRoutes(app) {
   const userCtrl = new UserCtrl();
   const roleCtrl = new RoleCtrl();
   const modulelistCtrl = new ModulelistCtrl();
+  const moduleroleCtrl = new ModuleroleCtrl();
   // Cats
   router.route('/cats').get(catCtrl.getAll);
   router.route('/cats/count').get(catCtrl.count);
@@ -46,6 +48,12 @@ router.route('/role/:id').delete(roleCtrl.delete);
 // Get All Admin Module list
 router.route('/modulelist').get(modulelistCtrl.getAll);
 router.route('/modulelist/:id').get(modulelistCtrl.get);
+
+
+//save module role
+
+router.route('/savemodulerole').post(moduleroleCtrl.insert);
+
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
 

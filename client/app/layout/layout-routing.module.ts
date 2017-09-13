@@ -8,6 +8,7 @@ const routes: Routes = [
         children: [
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
             { path: 'userlist', loadChildren: '../userlist/userlist.module#UserlistModule' },
+            { path: 'rolemanagement', loadChildren: '../rolemanagement/rolemanagement.module#RolemanagementModule' },
             { path: 'rolemanage', loadChildren: '../rolemanage/rolemanage.module#RolemanageModule' },
             { path: 'modulelist', loadChildren: '../modulelist/modulelist.module#ModulelistModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },

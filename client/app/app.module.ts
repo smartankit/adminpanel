@@ -17,6 +17,7 @@ import { UserService } from './services/user.service';
 
 
 
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     // for development
@@ -27,6 +28,7 @@ export function HttpLoaderFactory(http: Http) {
     declarations: [
         AppComponent,
         LogoutComponent
+        
         ],
     imports: [
         BrowserModule,

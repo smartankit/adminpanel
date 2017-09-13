@@ -12,8 +12,14 @@ export class ModuleService {
   getModules(): Observable<any> {
     return this.http.get('/api/modulelist').map(res => res.json());
   }
+  geModulelist(): Observable<any> {
+    return this.http.get('/api/modulelist').map(res => res.json());
+  }
   getModule(list): Observable<any> {
     return this.http.get(`/api/modulelist/${list._id}`).map(res => res.json());
+  }
+  saveRoleModule(roledata): Observable<any> {
+    return this.http.post('/api/savemodulerole', JSON.stringify(roledata), this.options);
   }
 }
 

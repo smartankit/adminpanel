@@ -1,0 +1,27 @@
+<app-page-header [heading]="'Role Management'" [icon]="'fa-user'">
+</app-page-header>
+<app-loading [condition]="isLoading"></app-loading>
+
+<div class="container" *ngIf="!isLoading">
+  <form [formGroup]="rolemanagementForm" (ngSubmit)="saveRole()">
+
+
+    <div class="form-group">
+      <label for="exampleSelect1">Select User Type</label>
+      <select class="form-control" name="usertype" formControlName="usertype" id="exampleSelect1">
+          <option value="" selected disabled>Select user</option>
+        <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
+       </select>
+    </div>
+    <div class="form-group" >
+      <label for="exampleSelect1">Select Module</label>
+      <div class="form-check" *ngFor="let list of modulelist">
+        <label class="form-check-label">
+        <input type="checkbox" name="namemodule"  (change)="onCheckChange($event)" formControlName="namemodule" [value]="list.link" class="form-check-input">
+        {{list.link}}
+      </label>
+      </div>
+    </div>
+    <button  class="btn btn-sm btn-success" type="submit" [disabled]="!rolemanagementForm.valid">Submit</button>
+  </form>
+</div>

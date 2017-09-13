@@ -6,12 +6,32 @@
         <a routerLink="/userlist" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-user"></i>&nbsp;{{ 'Userlist' | translate }}
         </a>
-        <a [routerLink]="['/rolemanage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+
+        <div class="nested-menu">
+                <a class="list-group-item" (click)="addExpandClass('role')">
+                    <span><i class="fa fa-plus"></i>&nbsp; {{ 'Role management' | translate }}</span>
+                </a>
+                <li class="nested" [class.expand]="showMenu === 'role'">
+                    <ul class="submenu">
+                        <li>
+                            <a href="javascript:void(0)"  [routerLink]="['/rolemanage']" [routerLinkActive]="['router-link-active']"><span> <i class="fa fa-tasks"></i>&nbsp;{{ 'Manage Role' | translate }}</span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" [routerLink]="['/modulelist']" [routerLinkActive]="['router-link-active']"><span> <i class="fa fa-server"></i>&nbsp;{{ 'Manage Module' | translate }}</span></a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" [routerLink]="['/rolemanagement']" [routerLinkActive]="['router-link-active']"><span>{{ 'Assign Module' | translate }}</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </div>
+
+        <!-- <a [routerLink]="['/rolemanage']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-tasks"></i>&nbsp;{{ 'Manage Role' | translate }}
         </a>
         <a [routerLink]="['/modulelist']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-server"></i>&nbsp;{{ 'Manage Module' | translate }}
-        </a>
+        </a> -->
         <!-- <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'charts' | translate }}
         </a>

@@ -12,5 +12,7 @@ export class MangeroleService {
   getRoles(): Observable<any> {
     return this.http.get('/api/roles').map(res => res.json());
   }
+  
+  
 }
 
