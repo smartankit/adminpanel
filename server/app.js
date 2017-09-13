@@ -1,4 +1,5 @@
 "use strict";
+exports.__esModule = true;
 var bodyParser = require("body-parser");
 var dotenv = require("dotenv");
 var express = require("express");
@@ -20,7 +21,7 @@ mongoose.Promise = global.Promise;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
     console.log('Connected to MongoDB');
-    routes_1.default(app);
+    routes_1["default"](app);
     app.get('/*', function (req, res) {
         res.sendFile(path.join(__dirname, '../public/index.html'));
     });
@@ -28,4 +29,3 @@ db.once('open', function () {
         console.log('Angular Full Stack listening on port ' + app.get('port'));
     });
 });
-//# sourceMappingURL=app.js.map

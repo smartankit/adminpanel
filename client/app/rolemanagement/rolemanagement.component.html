@@ -8,19 +8,22 @@
 
     <div class="form-group">
       <label for="exampleSelect1">Select User Type</label>
-      <select class="form-control" name="usertype" formControlName="usertype" id="exampleSelect1">
+      <select class="form-control" name="usertype" formControlName="usertype" id="exampleSelect1" (change)="getmodule($event.target.value)">
           <option value="" selected disabled>Select user</option>
         <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
        </select>
     </div>
     <div class="form-group" >
       <label for="exampleSelect1">Select Module</label>
-      <div class="form-check" *ngFor="let list of modulelist">
+
+     
+      <p-checkbox  *ngFor="let list of modulelist" value="{{list.link}}" name="{{list.link}}" label="{{list.link}}"  inputId="{{list.link}}" formControlName="namemodule"> {{list.link}}</p-checkbox>
+      <!-- <div class="form-check" *ngFor="let list of modulelist">
         <label class="form-check-label">
-        <input type="checkbox" name="namemodule"  (change)="onCheckChange($event)" formControlName="namemodule" [value]="list.link" class="form-check-input">
+        <input type="checkbox" name="namemodule"   formControlName="namemodule" [value]="list.link" class="form-check-input">
         {{list.link}}
       </label>
-      </div>
+      </div> -->
     </div>
     <button  class="btn btn-sm btn-success" type="submit" [disabled]="!rolemanagementForm.valid">Submit</button>
   </form>

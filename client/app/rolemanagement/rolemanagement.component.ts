@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnChanges} from '@angular/core';
 import { MangeroleService } from '../services/mangerole.service';
 import { ModuleService } from '../services/module.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -14,11 +14,12 @@ export class RolemanagementComponent implements OnInit {
   constructor(private router: Router, public toast: ToastComponent,private roleService: MangeroleService,private moduleService:ModuleService,private formBuilder: FormBuilder) { }
   roles=[];
   modulelist=[];
+  rolemodule=[];
   isLoading=true;
   rolemanagementForm: FormGroup;
-
+  selectedValues: string[] = [];
   usertype =  new FormControl('', [Validators.required]);
-  modulename = new FormControl([], [Validators.required]);
+  modulename = new FormControl('', [Validators.required]);
   items: any[] = [];
 
   
@@ -38,6 +39,24 @@ export class RolemanagementComponent implements OnInit {
      
     });
   }
+  getmodule(val)
+  {
+   console.log(val)  
+   this.getroleList(val)
+  
+  }
+
+
+  getroleList(type){
+    this.moduleService.getrolemodule(type).subscribe(
+      data => this.rolemodule = data,
+      error => console.log(error),
+      () => this.isLoading = false
+    );   
+
+
+  }
+
   //get all  user details
   getRoles() {
     this.roleService.getRoles().subscribe(
@@ -56,7 +75,7 @@ export class RolemanagementComponent implements OnInit {
   }
 
   saveRole(){
-    console.log(this.rolemanagementForm);
+    console.log(this.modulename);
     this.moduleService.saveRoleModule(this.rolemanagementForm.value).subscribe(
       res => {
         this.toast.setMessage('Role has been set successfully', 'success');

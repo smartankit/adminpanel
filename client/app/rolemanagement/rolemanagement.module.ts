@@ -6,13 +6,15 @@ import { PageHeaderModule } from '../shared';
 import { SharedModule } from '../shared/toast/shared.module';
 import { MangeroleService } from '../services/mangerole.service';
 import { ModuleService } from '../services/module.service';
-
+import {CheckboxModule,DialogModule,ButtonModule} from 'primeng/primeng';
 @NgModule({
   imports: [
     CommonModule,
     RolemanagementRoutingModule,
     PageHeaderModule,
-    SharedModule
+    SharedModule,
+    CheckboxModule,
+    DialogModule,ButtonModule
   
   ],
   declarations: [RolemanagementComponent],

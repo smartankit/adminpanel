@@ -40,7 +40,12 @@ abstract class BaseCtrl {
       res.json(obj);
     });
   }
-
+  getmodule = (req, res) => {
+    this.model.findOne({ usertype: req.params.id }, (err, obj) => {
+      if (err) { return console.error(err); }
+      res.json(obj);
+    });
+  }
   // Update by id
   update = (req, res) => {
     this.model.findOneAndUpdate({ _id: req.params.id }, req.body, (err) => {

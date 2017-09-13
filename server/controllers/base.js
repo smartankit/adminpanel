@@ -1,5 +1,6 @@
 "use strict";
-var BaseCtrl = (function () {
+exports.__esModule = true;
+var BaseCtrl = /** @class */ (function () {
     function BaseCtrl() {
         var _this = this;
         // Get all
@@ -43,14 +44,6 @@ var BaseCtrl = (function () {
                 res.json(obj);
             });
         };
-        this.getmodule = function (req, res) {
-            _this.model.findOne({ usertype: req.params.id }, function (err, obj) {
-                if (err) {
-                    return console.error(err);
-                }
-                res.json(obj);
-            });
-        };
         // Update by id
         this.update = function (req, res) {
             _this.model.findOneAndUpdate({ _id: req.params.id }, req.body, function (err) {
@@ -61,7 +54,7 @@ var BaseCtrl = (function () {
             });
         };
         // Delete by id
-        this.delete = function (req, res) {
+        this["delete"] = function (req, res) {
             _this.model.findOneAndRemove({ _id: req.params.id }, function (err) {
                 if (err) {
                     return console.error(err);
@@ -72,6 +65,4 @@ var BaseCtrl = (function () {
     }
     return BaseCtrl;
 }());
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = BaseCtrl;
-//# sourceMappingURL=base.js.map
+exports["default"] = BaseCtrl;

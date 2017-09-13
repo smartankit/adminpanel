@@ -18,8 +18,19 @@ export class ModuleService {
   getModule(list): Observable<any> {
     return this.http.get(`/api/modulelist/${list._id}`).map(res => res.json());
   }
+
+  getrolemodule(type): Observable<any> {
+   //console.log(type);
+    return this.http.get(`/api/getrolemodule/${type}`).map(res => res.json());
+  }
   saveRoleModule(roledata): Observable<any> {
-    return this.http.post('/api/savemodulerole', JSON.stringify(roledata), this.options);
+    if(roledata._id){
+      return this.http.put(`/api/savemodulerole/${roledata._id}`, JSON.stringify(roledata), this.options);
+    
+    }else{
+      return this.http.post('/api/savemodule', JSON.stringify(roledata), this.options);
+    }
+    
   }
 }
 
