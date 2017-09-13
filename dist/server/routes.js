@@ -4,11 +4,13 @@ var express = require("express");
 var cat_1 = require("./controllers/cat");
 var user_1 = require("./controllers/user");
 var role_1 = require("./controllers/role");
+var modulelist_1 = require("./controllers/modulelist");
 function setRoutes(app) {
     var router = express.Router();
     var catCtrl = new cat_1.default();
     var userCtrl = new user_1.default();
     var roleCtrl = new role_1.default();
+    var modulelistCtrl = new modulelist_1.default();
     // Cats
     router.route('/cats').get(catCtrl.getAll);
     router.route('/cats/count').get(catCtrl.count);
@@ -31,6 +33,9 @@ function setRoutes(app) {
     router.route('/role/:id').get(roleCtrl.get);
     router.route('/role/:id').put(roleCtrl.update);
     router.route('/role/:id').delete(roleCtrl.delete);
+    // Get All Admin Module list
+    router.route('/modulelist').get(modulelistCtrl.getAll);
+    router.route('/modulelist/:id').get(modulelistCtrl.get);
     // Apply the routes to our application with the prefix /api
     app.use('/api', router);
 }

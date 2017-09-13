@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col col-xl-12 col-lg-12">
+    <app-toast [message]="toast.message"></app-toast>
+    <app-page-header [heading]="'UserList'" [icon]="'fa-user'"></app-page-header>
+    <app-loading [condition]="isLoading"></app-loading>
+
+
+
+
+    <div class="card" *ngIf="!isLoading" [@routerTransition]>
+      <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        <a class="navbar-brand" href="#">Total Modules ({{modulelist.length}})</a>
+
+    
+      </nav>
+
+
+
+      <div class="card-block table-responsive ">
+        <table class="table">
+          <thead class="table table-hover table-striped">
+            <tr>
+              <th>Module Name</th>
+           
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="modulelist.length === 0">
+            <tr>
+              <td colspan="4">There are no Module Found.</td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr *ngFor="let list of modulelist">
+              <td>{{list.alias}}</td>
+              
+              <td>
+             
+                <button class="btn btn-sm btn-primary" (click)="getModule(list)">
+              <i class="fa fa-eye"></i>View
+            </button>
+         
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<p-dialog header="Module List" [(visible)]="display" modal="modal" width="500" [responsive]="true">
+ 
+  <div class="card-block table-responsive " [@routerTransition]>
+     <app-loading [condition]="isLoadingpop"></app-loading>
+    <table class="table">
+      <thead class="table table-hover table-striped">
+        <tr>
+          <th>Module Name</th>
+          <th>Alias</th>
+        
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>{{module.modulename}}</td>
+          <td>{{module.alias}}</td>
+       
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p-footer>
+
+    <button type="button" pButton icon="fa-close" (click)="display=false" label="Close"></button>
+  </p-footer>
+</p-dialog>
