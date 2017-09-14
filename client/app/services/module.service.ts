@@ -24,6 +24,7 @@ export class ModuleService {
     return this.http.get(`/api/getrolemodule/${type}`).map(res => res.json());
   }
   saveRoleModule(roledata): Observable<any> {
+    console.log(roledata);
     if(roledata._id){
       return this.http.put(`/api/savemodulerole/${roledata._id}`, JSON.stringify(roledata), this.options);
     

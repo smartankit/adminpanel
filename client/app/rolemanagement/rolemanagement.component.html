@@ -1,14 +1,14 @@
 <app-page-header [heading]="'Role Management'" [icon]="'fa-user'">
 </app-page-header>
 <app-loading [condition]="isLoading"></app-loading>
-
+<app-toast [message]="toast.message"></app-toast>
 <div class="container" *ngIf="!isLoading">
-  <form [formGroup]="rolemanagementForm" (ngSubmit)="saveRole()">
+  <form [formGroup]="myForm" (ngSubmit)="saveRole()">
 
 
     <div class="form-group">
       <label for="exampleSelect1">Select User Type</label>
-      <select class="form-control" name="usertype" formControlName="usertype" id="exampleSelect1" (change)="getmodule($event.target.value)">
+      <select class="form-control" name="usertype" formControlName="usertype" (change)="getmodule($event.target.value)">
           <option value="" selected disabled>Select user</option>
         <option *ngFor="let role of roles" [value]="role.name">{{role.name}}</option>
        </select>
@@ -17,14 +17,29 @@
       <label for="exampleSelect1">Select Module</label>
 
      
-      <p-checkbox  *ngFor="let list of modulelist" value="{{list.link}}" name="{{list.link}}" label="{{list.link}}"  inputId="{{list.link}}" formControlName="namemodule"> {{list.link}}</p-checkbox>
-      <!-- <div class="form-check" *ngFor="let list of modulelist">
-        <label class="form-check-label">
-        <input type="checkbox" name="namemodule"   formControlName="namemodule" [value]="list.link" class="form-check-input">
+      <div class="form-check" *ngFor="let list of modulelist;let i = index">
+        
+        
+        <span *ngIf="rolemodule[i] === list.link else elseBlock " >
+        <label class="form-check-label"  >
+       
+        <input type="checkbox"  [checked]="list.link"  formControlName="modulename"  name="namemodule"  (change)="onChange(list.link, $event.target.checked)"   class="form-check-input">
         {{list.link}}
-      </label>
-      </div> -->
+       </label>
+       </span>
+       <ng-template #elseBlock>
+       <label class="form-check-label"  >
+          
+           <input type="checkbox"  formControlName="modulename"  name="namemodule"  (change)="onChange(list.link, $event.target.checked)"   class="form-check-input">
+           {{list.link}}
+          </label>
+        </ng-template>   
+      </div>
+
     </div>
-    <button  class="btn btn-sm btn-success" type="submit" [disabled]="!rolemanagementForm.valid">Submit</button>
+    <button  class="btn btn-sm btn-success" type="submit" [disabled]="!myForm.valid">Submit</button>
   </form>
 </div>
+
+<!-- 
+<pre>Form values: {{myForm.value | json}}</pre> -->

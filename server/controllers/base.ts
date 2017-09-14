@@ -41,6 +41,7 @@ abstract class BaseCtrl {
     });
   }
   getmodule = (req, res) => {
+    console.log(req.params);
     this.model.findOne({ usertype: req.params.id }, (err, obj) => {
       if (err) { return console.error(err); }
       res.json(obj);
@@ -54,6 +55,14 @@ abstract class BaseCtrl {
     });
   }
 
+   // Update by id
+   updatemodule = (req, res) => {
+     console.log(req.params);
+    this.model.findOneAndUpdate({ usertype: req.params.id }, req.body, (err) => {
+      if (err) { return console.error(err); }
+      res.sendStatus(200);
+    });
+  }
   // Delete by id
   delete = (req, res) => {
     this.model.findOneAndRemove({ _id: req.params.id }, (err) => {

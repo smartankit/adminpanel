@@ -1,13 +1,13 @@
 import { Component, OnInit ,OnChanges} from '@angular/core';
 import { MangeroleService } from '../services/mangerole.service';
 import { ModuleService } from '../services/module.service';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormArray,FormGroup, FormControl, Validators, FormBuilder,FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-rolemanagement',
   templateUrl: './rolemanagement.component.html',
-  styleUrls: ['./rolemanagement.component.scss']
+   styleUrls: ['./rolemanagement.component.scss']
 })
 export class RolemanagementComponent implements OnInit {
 
@@ -20,25 +20,32 @@ export class RolemanagementComponent implements OnInit {
   selectedValues: string[] = [];
   usertype =  new FormControl('', [Validators.required]);
   modulename = new FormControl('', [Validators.required]);
-  items: any[] = [];
+ 
+  namemodule: any[] = [];
+  myForm: FormGroup;
+  ngOnInit() {
+    this.myForm = this.formBuilder.group({
+      usertype: this.usertype,
+      modulename:this.modulename,
+      namemodule:this.formBuilder.array([])
+     
+    });
+      this.getRoles();
+    this.geModulelist();
+  }  
+  
+  onChange(module:string, isChecked: boolean) {
+    const moduleFormArray = <FormArray>this.myForm.controls.namemodule;
+
+    if(isChecked) {
+      moduleFormArray.push(new FormControl(module));
+    } else {
+      let index = moduleFormArray.controls.findIndex(x => x.value == module)
+      moduleFormArray.removeAt(index);
+    }
+}
 
   
-  ngOnInit() {
-    this.rolemanagementForm = this.formBuilder.group({
-      usertype: this.usertype,
-      namemodule: this.modulename
-     
-    });
-    this.getRoles();
-    this.geModulelist();
-  }
-
-  createItem(): FormGroup {
-    return this.formBuilder.group({
-      name: '',
-     
-    });
-  }
   getmodule(val)
   {
    console.log(val)  
@@ -49,7 +56,7 @@ export class RolemanagementComponent implements OnInit {
 
   getroleList(type){
     this.moduleService.getrolemodule(type).subscribe(
-      data => this.rolemodule = data,
+      data => this.rolemodule = data.namemodule,
       error => console.log(error),
       () => this.isLoading = false
     );   
@@ -75,8 +82,8 @@ export class RolemanagementComponent implements OnInit {
   }
 
   saveRole(){
-    console.log(this.modulename);
-    this.moduleService.saveRoleModule(this.rolemanagementForm.value).subscribe(
+    console.log(this.myForm.value);
+    this.moduleService.saveRoleModule(this.myForm.value).subscribe(
       res => {
         this.toast.setMessage('Role has been set successfully', 'success');
         this.router.navigate(['/rolemanagement']);
