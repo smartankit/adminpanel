@@ -51,9 +51,10 @@ router.route('/modulelist/:id').get(modulelistCtrl.get);
 
 
 //save module role
+router.route('/getrolemodule/count/:id').get(moduleroleCtrl.countmodule);
 router.route('/getrolemodule/:id').get(moduleroleCtrl.getmodule);
 router.route('/savemodule').post(moduleroleCtrl.insert);
-router.route('/savemodulerole:id').put(moduleroleCtrl.update);
+router.route('/savemodulerole/:id').put(moduleroleCtrl.updatemodule);
 
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

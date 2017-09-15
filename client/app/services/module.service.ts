@@ -23,15 +23,23 @@ export class ModuleService {
    //console.log(type);
     return this.http.get(`/api/getrolemodule/${type}`).map(res => res.json());
   }
+
+  getcountrolemodule(roledata): Observable<any> {
+    //console.log(type);
+     return this.http.get(`/api/getrolemodule/count/${roledata.usertype}`).map(res => res.json());
+   }
+
+
   saveRoleModule(roledata): Observable<any> {
     console.log(roledata);
-    if(roledata._id){
-      return this.http.put(`/api/savemodulerole/${roledata._id}`, JSON.stringify(roledata), this.options);
-    
+   // console.log(roledata.formdata);
+    if(roledata.countdata > 0 ){
+      return this.http.put(`/api/savemodulerole/${roledata.formdata.usertype}`, JSON.stringify(roledata.formdata), this.options);
+     
     }else{
-      return this.http.post('/api/savemodule', JSON.stringify(roledata), this.options);
+      return this.http.post(`/api/savemodule/`, JSON.stringify(roledata.formdata), this.options);
+      
     }
     
   }
 }
-

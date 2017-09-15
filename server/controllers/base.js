@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var BaseCtrl = /** @class */ (function () {
+abstract;
+var BaseCtrl = (function () {
     function BaseCtrl() {
         var _this = this;
+        this.abstract = model;
         // Get all
         this.getAll = function (req, res) {
             _this.model.find({}, function (err, docs) {
@@ -15,15 +15,6 @@ var BaseCtrl = /** @class */ (function () {
         // Count all
         this.count = function (req, res) {
             _this.model.count(function (err, count) {
-                if (err) {
-                    return console.error(err);
-                }
-                res.json(count);
-            });
-        };
-        // countmodule module for admin
-        this.countmodule = function (req, res) {
-            _this.model.find({ usertype: req.params.id }).count(function (err, count) {
                 if (err) {
                     return console.error(err);
                 }
@@ -92,6 +83,5 @@ var BaseCtrl = /** @class */ (function () {
         };
     }
     return BaseCtrl;
-}());
-exports.default = BaseCtrl;
-//# sourceMappingURL=base.js.map
+})();
+exports["default"] = BaseCtrl;

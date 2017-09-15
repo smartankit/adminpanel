@@ -17,6 +17,15 @@ abstract class BaseCtrl {
       res.json(count);
     });
   }
+  // countmodule module for admin
+
+
+  countmodule = (req, res) => {
+    this.model.find({ usertype: req.params.id }).count((err, count) => {
+      if (err) { return console.error(err); }
+      res.json(count);
+    });
+  }
 
   // Insert
   insert = (req, res) => {
