@@ -58,27 +58,7 @@ export class RolemanagementComponent implements OnInit {
 
   }
 
-  /*
-    // send_categories() is now called after get_categories().
-  search_categories() {
-    this.get_categories(1)
-      // The .subscribe() method accepts 3 callbacks
-      .subscribe(
-        // The 1st callback handles the data emitted by the observable.
-        // In your case, it's the JSON data extracted from the response.
-        // That's where you'll find your total property.
-        (jsonData) => {
-          this.send_categories(jsonData.total);
-        },
-        // The 2nd callback handles errors.
-        (err) => console.error(err),
-        // The 3rd callback handles the "complete" event.
-        () => console.log("observable complete")
-      );
-  }
   
-  */
-
   getroleList(type) {
     this.moduleService.getrolemodule(type).subscribe(
       (data) => {

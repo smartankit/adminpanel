@@ -7,7 +7,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { ModuleService } from './services/module.service';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
@@ -46,7 +46,7 @@ export function HttpLoaderFactory(http: Http) {
     ],
     providers: [AuthService,
         
-        AuthGuardAdmin,UserService],
+        AuthGuardAdmin,UserService,ModuleService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
