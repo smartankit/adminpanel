@@ -28,8 +28,17 @@
         <table class="table">
           <thead class="table table-hover table-striped">
             <tr>
-              <th>Username</th>
-              <th>Email</th>
+              <th [class.active]="order === 'username'"
+              (click)="setOrder('username')"
+              class="mdl-data-table__cell--non-numeric"
+          >
+            Username <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span></th>
+
+              <th [class.active]="order === 'email'"
+              (click)="setOrder('email')"
+              class="mdl-data-table__cell--non-numeric"
+          >
+            Email <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span></th>
               <th>Role</th>
               <th>Actions</th>
             </tr>
@@ -40,7 +49,7 @@
             </tr>
           </tbody>
           <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of users  | orderBy: order:reverse | paginate: { itemsPerPage: 5, currentPage: p }">
               <td>{{user.username}}</td>
               <td>{{user.email}}</td>
               <td>{{user.role}}</td>
@@ -61,6 +70,7 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls class="centerpage" (pageChange)="p = $event"></pagination-controls>
       </div>
     </div>
   </div>

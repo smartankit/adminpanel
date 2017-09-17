@@ -4,10 +4,12 @@ import { SharedModule } from '../shared/toast/shared.module';
 import { UserListComponent } from './userlist.component';
 import { UserlistRoutingModule } from './userlist-routing.module';
 import { PageHeaderModule } from '../shared';
-import {DialogModule,ButtonModule} from 'primeng/primeng';
+import {DialogModule,ButtonModule,PaginatorModule} from 'primeng/primeng';
 import { EdituserComponent } from '.././userlist/edituser/edituser.component';
 import { AdduserComponent } from '.././userlist/adduser/adduser.component';
 import { MangeroleService } from '../services/mangerole.service';
+import { OrderModule } from 'ngx-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,8 +17,10 @@ import { MangeroleService } from '../services/mangerole.service';
     SharedModule,
     UserlistRoutingModule,
     DialogModule,
-    ButtonModule
-   
+    ButtonModule,
+    OrderModule,
+    PaginatorModule,
+    NgxPaginationModule
     
     
   ],

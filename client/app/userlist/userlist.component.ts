@@ -9,11 +9,12 @@ import { MangeroleService } from '../services/mangerole.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './userlist.component.html',
-  styleUrls: ['./userlist.component.css'],
+  styleUrls: ['./userlist.component.scss'],
   animations: [routerTransition()]
 })
 export class UserListComponent implements OnInit {
-
+  order: string = 'username';
+  reverse: boolean = false;
   users = [];
   user = {};
   selecteduser = [];
@@ -22,7 +23,7 @@ export class UserListComponent implements OnInit {
   constructor(public auth: AuthService,
     public toast: ToastComponent,
     private userService: UserService,private roleService: MangeroleService) { }
-
+    p: number = 1;
   ngOnInit() {
     this.getUsers();
     this.getRoles();
@@ -36,7 +37,13 @@ export class UserListComponent implements OnInit {
     );
   }
 
+  setOrder(value: string) {
+    if (this.order === value) {
+      this.reverse = !this.reverse;
+    }
 
+    this.order = value;
+  }
 
   //get all  user details
   getUsers() {
@@ -70,7 +77,7 @@ export class UserListComponent implements OnInit {
     );
   }
 
-
+  
   display: boolean = false;
 
   showDialog() {
