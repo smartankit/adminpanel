@@ -19,12 +19,15 @@ export class UserListComponent implements OnInit {
   user = {};
   selecteduser = [];
   isLoading = true;
-  roles=[];
+  roles = [];
   constructor(public auth: AuthService,
     public toast: ToastComponent,
-    private userService: UserService,private roleService: MangeroleService) { }
+    private userService: UserService, private roleService: MangeroleService) { }
+  
+   //for pagination
     p: number = 1;
-  ngOnInit() {
+  
+    ngOnInit() {
     this.getUsers();
     this.getRoles();
   }
@@ -33,10 +36,11 @@ export class UserListComponent implements OnInit {
     this.roleService.getRoles().subscribe(
       data => this.roles = data,
       error => console.log(error),
-      () => this.isLoading = false
+     // () => this.isLoading = false
     );
   }
 
+     //for sorting reverse
   setOrder(value: string) {
     if (this.order === value) {
       this.reverse = !this.reverse;
@@ -58,7 +62,7 @@ export class UserListComponent implements OnInit {
     this.userService.getUser(user).subscribe(
 
       (data) => {
-      
+
         this.selecteduser = data;
         this.showDialog();
         //this.refresh() should work here
@@ -77,7 +81,7 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  
+
   display: boolean = false;
 
   showDialog() {
