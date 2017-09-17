@@ -65,9 +65,7 @@ abstract class BaseCtrl {
   }
   getallmodule = (req, res) => {
     var arr = req.params.id.split(',');
-    console.log(arr);       
-   
-    this.model.find({ modulename: { $in: arr } }, (err, docs) => {
+     this.model.find({ modulename: { $in: arr } }, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
     });
