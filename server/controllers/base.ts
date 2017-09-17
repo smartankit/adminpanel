@@ -49,13 +49,29 @@ abstract class BaseCtrl {
       res.json(obj);
     });
   }
+  getbyName = (req, res) => {
+    this.model.findOne({ link: req.params.id }, (err, obj) => {
+      if (err) { return console.error(err); }
+      res.json(obj);
+    });
+  }
+  
   getmodule = (req, res) => {
-    console.log(req.params);
+    //console.log(req.params);
     this.model.findOne({ usertype: req.params.id }, (err, obj) => {
       if (err) { return console.error(err); }
       res.json(obj);
     });
   }
+  getallmodule = (req, res) => {
+    var arr = req.params.id.split(',');
+    console.log(arr);       
+   
+    this.model.find({ modulename: { $in: arr } }, (err, docs) => {
+      if (err) { return console.error(err); }
+      res.json(docs);
+    });
+  } 
   // Update by id
   update = (req, res) => {
     this.model.findOneAndUpdate({ _id: req.params.id }, req.body, (err) => {

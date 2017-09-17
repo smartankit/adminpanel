@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var bcrypt = require("bcryptjs");
 var mongoose = require("mongoose");
 var userSchema = new mongoose.Schema({
@@ -43,5 +42,6 @@ userSchema.set('toJSON', {
     }
 });
 var User = mongoose.model('User', userSchema);
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = User;
 //# sourceMappingURL=user.js.map

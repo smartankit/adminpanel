@@ -1,5 +1,7 @@
-var bcrypt = require('bcryptjs');
-var mongoose = require('mongoose');
+"use strict";
+exports.__esModule = true;
+var bcrypt = require("bcryptjs");
+var mongoose = require("mongoose");
 var userSchema = new mongoose.Schema({
     username: String,
     email: { type: String, unique: true, lowercase: true, trim: true },

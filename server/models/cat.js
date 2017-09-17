@@ -1,4 +1,6 @@
-var mongoose = require('mongoose');
+"use strict";
+exports.__esModule = true;
+var mongoose = require("mongoose");
 var catSchema = new mongoose.Schema({
     name: String,
     weight: Number,

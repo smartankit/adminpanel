@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var BaseCtrl = /** @class */ (function () {
+var BaseCtrl = (function () {
     function BaseCtrl() {
         var _this = this;
         // Get all
@@ -53,13 +52,31 @@ var BaseCtrl = /** @class */ (function () {
                 res.json(obj);
             });
         };
+        this.getbyName = function (req, res) {
+            _this.model.findOne({ link: req.params.id }, function (err, obj) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(obj);
+            });
+        };
         this.getmodule = function (req, res) {
-            console.log(req.params);
+            //console.log(req.params);
             _this.model.findOne({ usertype: req.params.id }, function (err, obj) {
                 if (err) {
                     return console.error(err);
                 }
                 res.json(obj);
+            });
+        };
+        this.getallmodule = function (req, res) {
+            var arr = req.params.id.split(',');
+            console.log(arr);
+            _this.model.find({ modulename: { $in: arr } }, function (err, docs) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(docs);
             });
         };
         // Update by id
@@ -93,5 +110,6 @@ var BaseCtrl = /** @class */ (function () {
     }
     return BaseCtrl;
 }());
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = BaseCtrl;
 //# sourceMappingURL=base.js.map

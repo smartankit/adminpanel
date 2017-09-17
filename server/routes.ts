@@ -48,11 +48,15 @@ router.route('/role/:id').delete(roleCtrl.delete);
 // Get All Admin Module list
 router.route('/modulelist').get(modulelistCtrl.getAll);
 router.route('/modulelist/:id').get(modulelistCtrl.get);
+router.route('/singlemodulelist/:id').get(modulelistCtrl.getbyName);
+
 
 
 //save module role
 router.route('/getrolemodule/count/:id').get(moduleroleCtrl.countmodule);
 router.route('/getrolemodule/:id').get(moduleroleCtrl.getmodule);
+router.route('/allmodulelistname/:id').get(modulelistCtrl.getallmodule);
+
 router.route('/savemodule').post(moduleroleCtrl.insert);
 router.route('/savemodulerole/:id').put(moduleroleCtrl.updatemodule);
 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,Pipe, PipeTransform } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { UserService } from './services/user.service';
-
+import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
 
 
 
@@ -26,8 +26,12 @@ export function HttpLoaderFactory(http: Http) {
 }
 @NgModule({
     declarations: [
+      
         AppComponent,
-        LogoutComponent
+        LogoutComponent,
+        
+        
+        
         
         ],
     imports: [
@@ -36,6 +40,8 @@ export function HttpLoaderFactory(http: Http) {
         FormsModule,
         HttpModule,
         AppRoutingModule,
+        SharedPipesModule,
+        
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

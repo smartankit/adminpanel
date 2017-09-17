@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';  
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { OrderModule } from 'ngx-order-pipe';
 import { ToastComponent } from './toast.component';
 import { LoadingComponent } from '../loading/loading.component';
 
@@ -10,6 +10,7 @@ import { LoadingComponent } from '../loading/loading.component';
   imports: [
     CommonModule,
     FormsModule,
+    OrderModule,
     ReactiveFormsModule,
     HttpModule
   ],

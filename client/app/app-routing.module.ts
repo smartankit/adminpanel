@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LogoutComponent } from './logout/logout.component';
 import { RolemanageComponent } from './rolemanage/rolemanage.component';
+import { OrderModule } from 'ngx-order-pipe';
 
 //import { AuthGuard } from './shared';
 //import { AuthGuardLogin } from './services/auth-guard-login.service';

@@ -22,7 +22,8 @@ export class RolemanagementComponent implements OnInit {
   namemodule = new FormControl('', [Validators.required]);
   countroles = [];
 
-  myForm: FormGroup;
+  myForm=null;
+
   ngOnInit() {
     this.myForm = this.formBuilder.group({
       usertype: this.usertype,
@@ -87,6 +88,8 @@ export class RolemanagementComponent implements OnInit {
         // console.log(data.namemodule+'--'+element.link)
         if ((serach) && serach.indexOf(element.link) > -1) {
           // Object element.({"checked":true,"link":element.link});
+
+
           allPropertyNames.push({ "name": element.modulename, "checked": true, "link": element.link });
 
           //  console.log(element);
@@ -126,20 +129,7 @@ export class RolemanagementComponent implements OnInit {
     );
   }
 
-
-  countModulRole() {
-
-    this.moduleService.getcountrolemodule(this.myForm.value).subscribe(
-      data => this.countroles = data,
-      error => console.log(error)
-
-    );
-
-
-  }
   saveRole() {
-
-
 
     this.moduleService.getcountrolemodule(this.myForm.value).subscribe(
       (data) => {
@@ -150,16 +140,6 @@ export class RolemanagementComponent implements OnInit {
       error => console.log(error),
       () => this.isLoading = false
     );
-
-
-
-
-
-
-
-
-    this.countModulRole();
-    console.log(this.countroles)
 
 
 

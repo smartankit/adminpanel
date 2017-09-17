@@ -1,8 +1,8 @@
-abstract;
-var BaseCtrl = (function () {
+"use strict";
+exports.__esModule = true;
+var BaseCtrl = /** @class */ (function () {
     function BaseCtrl() {
         var _this = this;
-        this.abstract = model;
         // Get all
         this.getAll = function (req, res) {
             _this.model.find({}, function (err, docs) {
@@ -15,6 +15,15 @@ var BaseCtrl = (function () {
         // Count all
         this.count = function (req, res) {
             _this.model.count(function (err, count) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(count);
+            });
+        };
+        // countmodule module for admin
+        this.countmodule = function (req, res) {
+            _this.model.find({ usertype: req.params.id }).count(function (err, count) {
                 if (err) {
                     return console.error(err);
                 }
@@ -44,14 +53,35 @@ var BaseCtrl = (function () {
                 res.json(obj);
             });
         };
+        this.getbyName = function (req, res) {
+            _this.model.findOne({ link: req.params.id }, function (err, obj) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(obj);
+            });
+        };
         this.getmodule = function (req, res) {
-            console.log(req.params);
+            //console.log(req.params);
             _this.model.findOne({ usertype: req.params.id }, function (err, obj) {
                 if (err) {
                     return console.error(err);
                 }
                 res.json(obj);
             });
+        };
+        this.getallmodule = function (req, res) {
+            console.log('TEST55');
+            var arr = req.params.id.split(',');
+            
+            console.log(arr);
+            _this.model.find({ modulename: { $in: arr } }, function (err, docs) {
+                if (err) {
+                    return console.error(err);
+                }
+                console.log(docs);
+                res.json(docs);
+            })
         };
         // Update by id
         this.update = function (req, res) {
@@ -73,7 +103,7 @@ var BaseCtrl = (function () {
             });
         };
         // Delete by id
-        this.delete = function (req, res) {
+        this["delete"] = function (req, res) {
             _this.model.findOneAndRemove({ _id: req.params.id }, function (err) {
                 if (err) {
                     return console.error(err);
@@ -83,5 +113,5 @@ var BaseCtrl = (function () {
         };
     }
     return BaseCtrl;
-})();
+}());
 exports["default"] = BaseCtrl;

@@ -8,7 +8,10 @@ export class ModuleService {
   private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
   private options = new RequestOptions({ headers: this.headers });
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) { 
+
+    
+  }
   getModules(): Observable<any> {
     return this.http.get('/api/modulelist').map(res => res.json());
   }
@@ -18,9 +21,14 @@ export class ModuleService {
   getModule(list): Observable<any> {
     return this.http.get(`/api/modulelist/${list._id}`).map(res => res.json());
   }
-
+  getsingleModule(list): Observable<any> {
+  
+    return this.http.get(`/api/allmodulelistname/${list.namemodule}`).map(res => res.json());
+  }
+  
   getrolemodule(type): Observable<any> {
    //console.log(type);
+   
     return this.http.get(`/api/getrolemodule/${type}`).map(res => res.json());
   }
 
