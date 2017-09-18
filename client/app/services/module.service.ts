@@ -83,7 +83,7 @@ export class ModuleService  {
              (data) => {
               
                 if(data < 1){
-               //   this.router.navigate(['/not-found'])
+                  this.router.navigate(['/not-found'])
     
                 }
               }
