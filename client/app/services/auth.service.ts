@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelper } from 'angular2-jwt';
-
+import { Http, Headers, RequestOptions,Response } from '@angular/http';
 import { UserService } from '../services/user.service';
 
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class AuthService {
   loggedIn = false;
@@ -30,7 +31,7 @@ export class AuthService {
         this.setCurrentUser(decodedUser);
         return this.loggedIn;
       }
-    );
+    ).catch(this.handleError);
   }
 
   logout() {
@@ -52,6 +53,19 @@ export class AuthService {
     this.currentUser.role = decodedUser.role;
     decodedUser.role === 'admin' ? this.isAdmin = true : this.isAdmin = false;
     delete decodedUser.role;
+  }
+  private handleError(err) {
+    let errMessage: string;
+  
+    if (err instanceof Response) {
+      let body   = err.json() || '';
+      let error  = body.err || JSON.stringify(body);
+      errMessage = `${err.status} - ${err.statusText || ''} ${error}`;
+    } else {
+      errMessage = err.message ? err.message : err.toString();
+    }
+
+    return Observable.throw(errMessage);
   }
 
 }

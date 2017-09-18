@@ -10,6 +10,7 @@ const routes: Routes = [
             { path: 'userlist', loadChildren: '../userlist/userlist.module#UserlistModule' },
             { path: 'rolemanagement', loadChildren: '../rolemanagement/rolemanagement.module#RolemanagementModule' },
             { path: 'rolemanage', loadChildren: '../rolemanage/rolemanage.module#RolemanageModule' },
+            { path: 'cms', loadChildren: '../contentmanagement/cms.module#CmsModule' },
             { path: 'modulelist', loadChildren: '../modulelist/modulelist.module#ModulelistModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
             { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },

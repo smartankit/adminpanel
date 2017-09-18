@@ -13,9 +13,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 import { UserService } from './services/user.service';
 import { SharedPipesModule } from './shared/pipes/shared-pipes.module';
-
-
-
+import { SharedModule } from './shared/toast/shared.module';
 
 
 // AoT requires an exported function for factories
@@ -28,11 +26,8 @@ export function HttpLoaderFactory(http: Http) {
     declarations: [
       
         AppComponent,
-        LogoutComponent,
-        
-        
-        
-        
+        LogoutComponent
+               
         ],
     imports: [
         BrowserModule,
@@ -41,7 +36,7 @@ export function HttpLoaderFactory(http: Http) {
         HttpModule,
         AppRoutingModule,
         SharedPipesModule,
-        
+        SharedModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

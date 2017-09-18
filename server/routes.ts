@@ -56,6 +56,7 @@ router.route('/singlemodulelist/:id').get(modulelistCtrl.getbyName);
 router.route('/getrolemodule/count/:id').get(moduleroleCtrl.countmodule);
 router.route('/getrolemodule/:id').get(moduleroleCtrl.getmodule);
 router.route('/allmodulelistname/:id').get(modulelistCtrl.getallmodule);
+router.route('/checkmodulepermission/count/:id').get(moduleroleCtrl.getcheckmodule);
 
 router.route('/savemodule').post(moduleroleCtrl.insert);
 router.route('/savemodulerole/:id').put(moduleroleCtrl.updatemodule);

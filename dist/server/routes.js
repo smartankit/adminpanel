@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var cat_1 = require("./controllers/cat");
 var user_1 = require("./controllers/user");
@@ -42,11 +43,11 @@ function setRoutes(app) {
     router.route('/getrolemodule/count/:id').get(moduleroleCtrl.countmodule);
     router.route('/getrolemodule/:id').get(moduleroleCtrl.getmodule);
     router.route('/allmodulelistname/:id').get(modulelistCtrl.getallmodule);
+    router.route('/checkmodulepermission/count/:id').get(moduleroleCtrl.getcheckmodule);
     router.route('/savemodule').post(moduleroleCtrl.insert);
     router.route('/savemodulerole/:id').put(moduleroleCtrl.updatemodule);
     // Apply the routes to our application with the prefix /api
     app.use('/api', router);
 }
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = setRoutes;
 //# sourceMappingURL=routes.js.map

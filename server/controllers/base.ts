@@ -70,6 +70,18 @@ abstract class BaseCtrl {
       res.json(docs);
     });
   } 
+
+  getcheckmodule = (req, res) => {
+    console.log(req.params);
+   // req.headers.userrole
+    var arr = req.params.id.split(',');
+     this.model.find({ $and:[{ namemodule: { $in: arr } },{usertype:req.headers.userrole}]}).count((err, count) => {
+      if (err) { return console.error(err); }
+      res.json(count);
+    });
+  }
+
+
   // Update by id
   update = (req, res) => {
     this.model.findOneAndUpdate({ _id: req.params.id }, req.body, (err) => {

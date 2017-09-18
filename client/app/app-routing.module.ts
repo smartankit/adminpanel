@@ -18,13 +18,14 @@ const routes: Routes = [
     { path: 'rolemanage',loadChildren:'./rolemanage/rolemanage.module#RolemanageModule'},
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'userlist', loadChildren: './userlist/userlist.module#UserlistModule' },
+    { path: 'cms', loadChildren: './contentmanagement/cms.module#CmsModule' },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: '**', redirectTo: 'not-found' }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes,{ enableTracing: false } )],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -50,7 +50,7 @@ export class UserService {
     return this.http.get(`/api/user/${id}`,this.options).map(res => res.json()).catch(this.handleError);
   }
   editUser(user): Observable<any> {
-    return this.http.put(`/api/user/${user._id}`,this.options, JSON.stringify(user));
+    return this.http.put(`/api/user/${user._id}`, JSON.stringify(user),this.options);
   }
 
   deleteUser(user): Observable<any> {
@@ -58,7 +58,7 @@ export class UserService {
   }
   private handleError(err) {
     let errMessage: string;
-console.log("eroorrrrrrrrrrrrrrr");
+
     if (err instanceof Response) {
       let body   = err.json() || '';
       let error  = body.err || JSON.stringify(body);
