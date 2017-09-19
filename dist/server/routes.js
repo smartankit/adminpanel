@@ -6,6 +6,7 @@ var user_1 = require("./controllers/user");
 var role_1 = require("./controllers/role");
 var modulelist_1 = require("./controllers/modulelist");
 var modulerole_1 = require("./controllers/modulerole");
+var page_1 = require("./controllers/page");
 function setRoutes(app) {
     var router = express.Router();
     var catCtrl = new cat_1.default();
@@ -13,6 +14,7 @@ function setRoutes(app) {
     var roleCtrl = new role_1.default();
     var modulelistCtrl = new modulelist_1.default();
     var moduleroleCtrl = new modulerole_1.default();
+    var pageCtrl = new page_1.default();
     // Cats
     router.route('/cats').get(catCtrl.getAll);
     router.route('/cats/count').get(catCtrl.count);
@@ -46,6 +48,8 @@ function setRoutes(app) {
     router.route('/checkmodulepermission/count/:id').get(moduleroleCtrl.getcheckmodule);
     router.route('/savemodule').post(moduleroleCtrl.insert);
     router.route('/savemodulerole/:id').put(moduleroleCtrl.updatemodule);
+    router.route('/savepage').post(pageCtrl.insert);
+    router.route('/getpages').get(pageCtrl.getAll);
     // Apply the routes to our application with the prefix /api
     app.use('/api', router);
 }

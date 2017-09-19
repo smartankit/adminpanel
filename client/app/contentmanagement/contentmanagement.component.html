@@ -1,3 +1,68 @@
-<p>
-  contentmanagement works!
-</p>
+<div class="row">
+    <div class="col col-xl-12 col-lg-12">
+      <app-toast [message]="toast.message"></app-toast>
+      <app-page-header [heading]="'Pagelist'" [icon]="'fa-user'"></app-page-header>
+      <app-loading [condition]="isLoading"></app-loading>
+  
+  
+  
+  
+      <div class="card" *ngIf="pages.length" [@routerTransition]>
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          <a class="navbar-brand" href="#">pages ({{pages.length}})</a>
+  
+          <div class="rightdata">
+            <div class=" ">
+              <a style="text-align:right;" [routerLink]="['/cms/addcontent']" class="rightdata" [routerLinkActive]="['router-link-active']"><i class="fa fa-plus" aria-hidden="true"></i>  Add page</a>
+            </div>
+          </div>
+        </nav>
+  
+  
+  
+        <div class="card-block table-responsive ">
+          <table class="table">
+            <thead class="table table-hover table-striped">
+              <tr>
+                <th>pages</th>
+                <th>Descrptions</th>
+                
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="pages.length === 0">
+              <tr>
+                <td colspan="4">There are no pages.</td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr *ngFor="let page of pages  | orderBy: order:reverse | paginate: { itemsPerPage: 5, currentPage: p }">
+                <td innerHTML="{{page.pagename}}"></td>
+                <td innerHTML="{{page.desc}}"></td>
+               
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="deletePage(page)" >
+                <i class="fa fa-trash"></i>Delete
+              </button>
+                  <button class="btn btn-sm btn-primary" (click)="getPage(page)">
+                <i class="fa fa-eye"></i>View
+              </button>
+              <button class="btn btn-sm btn-warning" [routerLink]="['/cms/editcontent', page._id]" routerLinkActive="active">
+              
+          <i class="fa fa-pencil-square-o"></i>Edit
+             
+                </button>
+                </td>
+  
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls class="centerpage" (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
