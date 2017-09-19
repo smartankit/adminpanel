@@ -44,7 +44,6 @@ export class RolemanagementComponent implements OnInit {
       moduleFormArray.removeAt(index);
     }
 
-    console.log(moduleFormArray);
   }
 
 

@@ -38,9 +38,8 @@
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-black-tie"></i></span>
               <select class="form-control" name="role" formControlName="role">
-          <option value="" selected disabled>Role</option>
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
+                <option value="" selected disabled>Role</option>
+                <option *ngFor="let role of roles" [value]="role.name" >{{role.name}}</option>
         </select>
             </div>
           </fieldset>

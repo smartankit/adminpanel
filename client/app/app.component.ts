@@ -16,6 +16,10 @@ export class AppComponent {
     }
     ngOnInit() {
     //check user role authentication    
-    this.moduleService.checkModule();
+    
+    }
+    ngAfterViewInit(){
+        this.moduleService.checkModule();
+
     }
 }

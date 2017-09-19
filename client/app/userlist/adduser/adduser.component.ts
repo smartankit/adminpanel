@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ToastComponent } from '../../shared/toast/toast.component';
+import { MangeroleService } from '../../services/mangerole.service';
 
 @Component({
   selector: 'app-adduser',
@@ -27,9 +28,10 @@ export class AdduserComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               public toast: ToastComponent,
-              private userService: UserService) { }
+              private userService: UserService,private roleService: MangeroleService) { }
 
   ngOnInit() {
+    this.getRoles();
     this.registerForm = this.formBuilder.group({
       username: this.username,
       email: this.email,
@@ -37,7 +39,9 @@ export class AdduserComponent implements OnInit {
       role: this.role
     });
   }
-
+  roles=[];
+  selecteduser = [];
+  isLoading = true;
   setClassUsername() {
     return { 'has-danger': !this.username.pristine && !this.username.valid };
   }
@@ -47,7 +51,14 @@ export class AdduserComponent implements OnInit {
   setClassPassword() {
     return { 'has-danger': !this.password.pristine && !this.password.valid };
   }
-
+//get all  user details
+getRoles() {
+  this.roleService.getRoles().subscribe(
+    data => this.roles = data,
+    error => console.log(error),
+    () => this.isLoading = false
+  );
+}
   register() {
     this.userService.register(this.registerForm.value).subscribe(
       res => {

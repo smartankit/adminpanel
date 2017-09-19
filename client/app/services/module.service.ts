@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { Router,NavigationStart } from '@angular/router';
+import { Router,NavigationStart,RouteConfigLoadStart } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../services/auth.service';
 import 'rxjs/add/operator/map';
@@ -66,14 +66,20 @@ export class ModuleService  {
 
   
   checkModule(){
-    
+    console.log(RouteConfigLoadStart);
         this.router.events.subscribe(event => {
-          if (event instanceof NavigationStart) {
-           let url= event.url.replace(/\//g, "");
-            if(url =="") { let name ='dashboard';} else {let name=url;}             
-             this.checkModuleAccess(name)
-            console.log("current url1", event.url); // event.url has current url
+          if (event instanceof RouteConfigLoadStart) {
             
+           let url= event.route.path.replace(/\//g, "");
+         // console.log("current url1", url); // event.url has current url
+           // console.log(localStorage.getItem('token'));
+                 
+            if(this.auth.currentUser.role!='admin' && url!="dashboard" && url!="" && url!="not-found" && url!="logout" && localStorage.getItem('token')!=null){         
+              this.checkModuleAccess(url)
+           //  console.log("current url1", url); // event.url has current url
+            
+             }
+           
           }
         });
     
@@ -84,7 +90,6 @@ export class ModuleService  {
               
                 if(data < 1){
                   this.router.navigate(['/not-found'])
-    
                 }
               }
         
