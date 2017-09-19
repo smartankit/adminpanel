@@ -1,14 +1,14 @@
-<app-loading [condition]="isLoading"></app-loading>
+
 
 <app-toast [message]="toast.message"></app-toast>
 <app-page-header [heading]="'Edit User'" [icon]="'fa-user'"></app-page-header>
-
+<app-loading [condition]="isLoading"></app-loading>
  <div class="row">
 
-  <div class="col col-xl-12 col-lg-12">
+  <div class="col col-xl-12 col-lg-12" *ngIf="!isLoading">
 
     <div class="card">
-
+      
       <div class="formGroup">
         <form [formGroup]="editForm" (ngSubmit)="save(user)">
 
