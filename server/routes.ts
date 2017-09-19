@@ -67,6 +67,11 @@ router.route('/savemodulerole/:id').put(moduleroleCtrl.updatemodule);
 
 router.route('/savepage').post(pageCtrl.insert);
 router.route('/getpages').get(pageCtrl.getAll);
+router.route('/getpage/:id').get(pageCtrl.get);
+router.route('/editContent/:id').put(pageCtrl.update);
+router.route('/deleteContent/:id').delete(pageCtrl.delete);
+
+
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);
 

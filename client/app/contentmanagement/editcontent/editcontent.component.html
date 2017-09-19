@@ -1,3 +1,49 @@
-<p>
-  editcontent works!
-</p>
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+<app-page-header [heading]="'Edit page'" [icon]="'fa-user'"></app-page-header>
+    <form [formGroup]="pageForm" (ngSubmit)="save(pagedata)">
+      <p-panel header="Edit page">
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              Pagename *:
+            </div>
+            <div class="ui-grid-col-6">
+              <input pInputText type="text" [(ngModel)]="pagedata.pagename" formControlName="pagename" placeholder="Required" />
+            </div>
+            <div class="ui-grid-col-4">
+              <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!pageForm.controls['pagename'].valid&&pageForm.controls['pagename'].dirty">
+                <i class="fa fa-close"></i> Pagename is required
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+              Description:
+            </div>
+            <div class="ui-grid-col-8">
+
+              <p-editor formControlName="desc" [(ngModel)]="pagedata.desc" [style]="{'height':'320px'}"></p-editor>
+            </div>
+            <div class="ui-grid-col-2"></div>
+          </div>
+
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-2"></div>
+            <div class="ui-grid-col-2">
+              <button pButton type="submit" label="Submit" [disabled]="!pageForm.valid"></button>
+            </div>
+            <div class="ui-grid-col-4"></div>
+          </div>
+
+
+
+        </div>
+
+      </p-panel>
+    </form>
+

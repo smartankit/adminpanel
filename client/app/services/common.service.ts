@@ -28,6 +28,16 @@ export class CommonService {
   getPages(): Observable<any> {
     return this.http.get('/api/getpages').map(res => res.json(), this.options).catch(this.handleError);
   }
+  getPage(id): Observable<any> {
+    return this.http.get(`/api/getpage/${id}`).map(res => res.json(), this.options).catch(this.handleError);
+  }
+  editContent(data): Observable<any> {
+    return this.http.put(`/api/editContent/${data._id}`, JSON.stringify(data), this.options).catch(this.handleError);
+  }
+  deleteContent(data): Observable<any> {
+    return this.http.delete(`/api/deleteContent/${data._id}`,this.options);
+  }
+  
  
   private handleError(err) {
     let errMessage: string;

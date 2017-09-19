@@ -7,7 +7,7 @@
   
   
   
-      <div class="card" *ngIf="pages.length" [@routerTransition]>
+      <div class="card"  [@routerTransition]>
         <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +17,7 @@
   
           <div class="rightdata">
             <div class=" ">
-              <a style="text-align:right;" [routerLink]="['/cms/addcontent']" class="rightdata" [routerLinkActive]="['router-link-active']"><i class="fa fa-plus" aria-hidden="true"></i>  Add page</a>
+              <a  [routerLink]="['/cms/addcontent']" class="rightdata" [routerLinkActive]="['router-link-active']"><i class="fa fa-plus" aria-hidden="true"></i>  Add page</a>
             </div>
           </div>
         </nav>
@@ -36,7 +36,8 @@
             </thead>
             <tbody *ngIf="pages.length === 0">
               <tr>
-                <td colspan="4">There are no pages.</td>
+                  <td colspan="1"></td>
+                <td colspan="3">There are no pages.</td>
               </tr>
             </tbody>
             <tbody>
@@ -48,7 +49,7 @@
                   <button class="btn btn-sm btn-danger" (click)="deletePage(page)" >
                 <i class="fa fa-trash"></i>Delete
               </button>
-                  <button class="btn btn-sm btn-primary" (click)="getPage(page)">
+                  <button class="btn btn-sm btn-primary" (click)="getPage( page._id)">
                 <i class="fa fa-eye"></i>View
               </button>
               <button class="btn btn-sm btn-warning" [routerLink]="['/cms/editcontent', page._id]" routerLinkActive="active">
@@ -66,3 +67,34 @@
       </div>
     </div>
   </div>
+
+  <p-dialog header="View Page" [(visible)]="display" modal="modal" width="600" [responsive]="true">
+      
+      <div class="card-block table-responsive " [@routerTransition]>
+        <table class="table">
+          <thead class="table table-hover table-striped">
+            <tr>
+              <th>Page name</th>
+              <th>Description</th>
+              
+    
+            </tr>
+          </thead>
+    
+          <tbody>
+    
+            <tr>
+                <td innerHTML="{{pagedata.pagename}}"></td>
+                <td innerHTML="{{pagedata.desc}}"></td>
+           
+    
+    
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p-footer>
+    
+        <button type="button" pButton icon="fa-close" (click)="display=false" label="Close"></button>
+      </p-footer>
+    </p-dialog>

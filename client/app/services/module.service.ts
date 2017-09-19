@@ -66,14 +66,12 @@ export class ModuleService  {
 
   
   checkModule(){
-    console.log(RouteConfigLoadStart);
+  
         this.router.events.subscribe(event => {
           if (event instanceof RouteConfigLoadStart) {
             
            let url= event.route.path.replace(/\//g, "");
-         // console.log("current url1", url); // event.url has current url
-           // console.log(localStorage.getItem('token'));
-                 
+     
             if(this.auth.currentUser.role!='admin' && url!="dashboard" && url!="" && url!="not-found" && url!="logout" && localStorage.getItem('token')!=null){         
               this.checkModuleAccess(url)
            //  console.log("current url1", url); // event.url has current url
