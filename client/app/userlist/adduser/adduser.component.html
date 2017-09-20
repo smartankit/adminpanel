@@ -43,7 +43,12 @@
         </select>
             </div>
           </fieldset>
-          <button class="btn btn-sm btn-success" type="submit" [disabled]="!registerForm.valid"> Add User</button>
+          <fieldset class="form-group">
+            <input id="photo" name="filename" type="file" />
+            <!-- button to trigger the file upload when submitted -->
+            <span >click</span>
+            </fieldset>
+          <button class="btn btn-sm btn-success"  (click)="upload()" type="submit" [disabled]="!registerForm.valid"> Add User</button>
           <a [routerLink]="['/userlist']" class="btn btn-sm btn-primary" > Back</a>
           
         </form>

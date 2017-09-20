@@ -3,14 +3,14 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var cat_1 = require('../models/cat');
+var page_1 = require('../models/page');
 var base_1 = require('./base');
-var CatCtrl = (function (_super) {
-    __extends(CatCtrl, _super);
-    function CatCtrl() {
+var PageCtrl = (function (_super) {
+    __extends(PageCtrl, _super);
+    function PageCtrl() {
         _super.apply(this, arguments);
-        this.model = cat_1["default"];
+        this.model = page_1["default"];
     }
-    return CatCtrl;
+    return PageCtrl;
 })(base_1["default"]);
-exports["default"] = CatCtrl;
+exports["default"] = PageCtrl;

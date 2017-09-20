@@ -1,8 +1,8 @@
-"use strict";
-exports.__esModule = true;
-var BaseCtrl = /** @class */ (function () {
+abstract;
+var BaseCtrl = (function () {
     function BaseCtrl() {
         var _this = this;
+        this.abstract = model;
         // Get all
         this.getAll = function (req, res) {
             _this.model.find({}, function (err, docs) {
@@ -71,17 +71,24 @@ var BaseCtrl = /** @class */ (function () {
             });
         };
         this.getallmodule = function (req, res) {
-            console.log('TEST55');
             var arr = req.params.id.split(',');
-            
-            console.log(arr);
             _this.model.find({ modulename: { $in: arr } }, function (err, docs) {
                 if (err) {
                     return console.error(err);
                 }
-                console.log(docs);
                 res.json(docs);
-            })
+            });
+        };
+        this.getcheckmodule = function (req, res) {
+            console.log(req.params);
+            // req.headers.userrole
+            var arr = req.params.id.split(',');
+            _this.model.find({ $and: [{ namemodule: { $in: arr } }, { usertype: req.headers.userrole }] }).count(function (err, count) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(count);
+            });
         };
         // Update by id
         this.update = function (req, res) {
@@ -103,7 +110,7 @@ var BaseCtrl = /** @class */ (function () {
             });
         };
         // Delete by id
-        this["delete"] = function (req, res) {
+        this.delete = function (req, res) {
             _this.model.findOneAndRemove({ _id: req.params.id }, function (err) {
                 if (err) {
                     return console.error(err);
@@ -113,5 +120,5 @@ var BaseCtrl = /** @class */ (function () {
         };
     }
     return BaseCtrl;
-}());
+})();
 exports["default"] = BaseCtrl;

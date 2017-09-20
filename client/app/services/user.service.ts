@@ -25,7 +25,11 @@ export class UserService {
   register(user): Observable<any> {
     return this.http.post('/api/user', JSON.stringify(user), this.options);
   }
+  addPhoto(url,formdata): Observable<any> {
 
+    return this.http.post(url,formdata).catch(this.handleError);
+  }
+  
   login(credentials): Observable<any> {
     return this.http.post('/api/login', JSON.stringify(credentials), this.options);
   }

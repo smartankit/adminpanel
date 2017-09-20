@@ -1,6 +1,39 @@
+let multer = require('multer');
+let DIR = './uploads/';
+let upload = multer({ dest: DIR }).single('photo');
+let path = require('path');
 abstract class BaseCtrl {
 
   abstract model: any;
+
+
+
+
+
+
+
+
+  uploadprofile = (req, res, next) => {
+    const obj = new this.model(req.body);
+    var path = '';
+    upload(req, res, function (err) {
+      if (err) { return console.error(err); }
+      console.log(req.file)
+     
+      obj.save((err, item) => {
+        // 11000 is the code for duplicate key error
+        if (err && err.code === 11000) {
+          res.sendStatus(400);
+        }
+        if (err) {
+          return console.error(err);
+        }
+        res.status(200).json(item);
+      });
+
+      res.sendStatus(200);
+    });
+  }
 
   // Get all
   getAll = (req, res) => {
@@ -55,7 +88,7 @@ abstract class BaseCtrl {
       res.json(obj);
     });
   }
-  
+
   getmodule = (req, res) => {
     //console.log(req.params);
     this.model.findOne({ usertype: req.params.id }, (err, obj) => {
@@ -65,17 +98,17 @@ abstract class BaseCtrl {
   }
   getallmodule = (req, res) => {
     var arr = req.params.id.split(',');
-     this.model.find({ modulename: { $in: arr } }, (err, docs) => {
+    this.model.find({ modulename: { $in: arr } }, (err, docs) => {
       if (err) { return console.error(err); }
       res.json(docs);
     });
-  } 
+  }
 
   getcheckmodule = (req, res) => {
     console.log(req.params);
-   // req.headers.userrole
+    // req.headers.userrole
     var arr = req.params.id.split(',');
-     this.model.find({ $and:[{ namemodule: { $in: arr } },{usertype:req.headers.userrole}]}).count((err, count) => {
+    this.model.find({ $and: [{ namemodule: { $in: arr } }, { usertype: req.headers.userrole }] }).count((err, count) => {
       if (err) { return console.error(err); }
       res.json(count);
     });
@@ -90,9 +123,9 @@ abstract class BaseCtrl {
     });
   }
 
-   // Update by id
-   updatemodule = (req, res) => {
-     console.log(req.params);
+  // Update by id
+  updatemodule = (req, res) => {
+    console.log(req.params);
     this.model.findOneAndUpdate({ usertype: req.params.id }, req.body, (err) => {
       if (err) { return console.error(err); }
       res.sendStatus(200);

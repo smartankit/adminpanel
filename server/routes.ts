@@ -10,6 +10,7 @@ import Cat from './models/cat';
 import User from './models/user';
 import Role from './models/role';
 import Page from './models/page';
+import UploadCtrl from './controllers/upload';
 import Modulelist from './models/modulelist';
 import Modulerole from './models/modulerole';
 export default function setRoutes(app) {
@@ -22,6 +23,8 @@ export default function setRoutes(app) {
   const modulelistCtrl = new ModulelistCtrl();
   const moduleroleCtrl = new ModuleroleCtrl();
   const pageCtrl = new PageCtrl();
+  const uploadCtrl = new UploadCtrl();
+  
   // Cats
   router.route('/cats').get(catCtrl.getAll);
   router.route('/cats/count').get(catCtrl.count);
@@ -38,7 +41,8 @@ export default function setRoutes(app) {
   router.route('/user/:id').get(userCtrl.get);
   router.route('/user/:id').put(userCtrl.update);
   router.route('/user/:id').delete(userCtrl.delete);
-
+  router.route('/addPhoto').post(userCtrl.uploadprofile);
+  
 
 // User Role
 router.route('/roles').get(roleCtrl.getAll);
