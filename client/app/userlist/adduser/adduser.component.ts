@@ -69,26 +69,29 @@ getRoles() {
   );
 }
   register() {
-    this.userService.register(this.registerForm.value).subscribe(
-      res => {
-        this.toast.setMessage('User Added Successfully', 'success');
-        this.router.navigate(['/userlist']);
-      },
-      error => this.toast.setMessage('email already exists', 'danger')
-    );
-  }
+    let formData = new FormData();
+    let data =this.registerForm.value;
+    for (var property in data) {
 
-  upload() {
+      if (data.hasOwnProperty(property)) {
+      console.log(property);
+      console.log(data[property]);
+        formData.append(property,data[property]);
+      }
+  }
+  console.log(formData);
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
     console.log("iam+ "+inputEl);
     let fileCount: number = inputEl.files.length;
-    let formData = new FormData();
+   
     if (fileCount > 0) { // a file was selected
         for (let i = 0; i < fileCount; i++) {
             formData.append('photo', inputEl.files.item(i));
         }
+       
+       
         this.userService
-        .addPhoto(URL, formData,).subscribe(
+        .addPhoto(URL, formData).subscribe(
           res => {
             this.toast.setMessage('photo Added Successfully', 'success');
             this.router.navigate(['/userlist']);
@@ -97,4 +100,16 @@ getRoles() {
         );
     }
    }
-}
+
+    // this.userService.register(this.registerForm.value).subscribe(
+    //   res => {
+    //     this.toast.setMessage('User Added Successfully', 'success');
+    //     this.router.navigate(['/userlist']);
+    //   },
+    //   error => this.toast.setMessage('email already exists', 'danger')
+    // );
+  }
+
+  
+  
+
