@@ -1,6 +1,20 @@
 let multer = require('multer');
-let DIR = './uploads/';
-let upload = multer({ dest: DIR }).single('photo');
+var DIR = './client/assets/uploads/';
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, DIR);
+  },
+  filename: function (req, file, cb) {
+    var originalname = file.originalname;
+    var extension = originalname.split(".");
+    var filename = Date.now() + '.' + extension[extension.length-1];
+    cb(null, filename);
+  }
+});
+let upload = multer({ dest: DIR,
+  storage: storage
+}).single('photo');
 let path = require('path');
 abstract class BaseCtrl {
 
@@ -14,25 +28,31 @@ abstract class BaseCtrl {
 
 
   uploadprofile = (req, res, next) => {
-    const obj = new this.model(req.body);
+    
+    const obj = new this.model(req.headers);
+  
     var path = '';
     upload(req, res, function (err) {
       if (err) { return console.error(err); }
-      console.log(req.file)
-     
-      obj.save((err, item) => {
-        // 11000 is the code for duplicate key error
-        if (err && err.code === 11000) {
-          res.sendStatus(400);
-        }
-        if (err) {
-          return console.error(err);
-        }
-        res.status(200).json(item);
+      if (req.file) {
+        obj.filename=req.file.filename
+      }
+      obj.save(function (err, item) {
+          // 11000 is the code for duplicate key error
+          if (err && err.code === 11000) {
+              res.sendStatus(400);
+          }
+          if (err) {
+              return console.error(err);
+          }
+          res.status(200).json(item);
       });
 
-      res.sendStatus(200);
+     
     });
+
+
+   
   }
 
   // Get all

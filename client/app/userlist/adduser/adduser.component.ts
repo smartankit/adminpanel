@@ -6,6 +6,7 @@ import { ToastComponent } from '../../shared/toast/toast.component';
 import { Http, Response } from '@angular/http';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
+import 'rxjs/add/operator/toPromise';
 import { MangeroleService } from '../../services/mangerole.service';
 
 import {Message,SelectItem} from 'primeng/components/common/api';
@@ -46,6 +47,8 @@ export class AdduserComponent implements OnInit {
       password: this.password,
       role: this.role
     });
+
+    
   }
   roles=[];
   selecteduser = [];
@@ -71,14 +74,7 @@ getRoles() {
   register() {
     let formData = new FormData();
     let data =this.registerForm.value;
-    for (var property in data) {
-
-      if (data.hasOwnProperty(property)) {
-      console.log(property);
-      console.log(data[property]);
-        formData.append(property,data[property]);
-      }
-  }
+    
   console.log(formData);
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
     console.log("iam+ "+inputEl);
@@ -88,18 +84,25 @@ getRoles() {
         for (let i = 0; i < fileCount; i++) {
             formData.append('photo', inputEl.files.item(i));
         }
+      }  
        
-       
-        this.userService
-        .addPhoto(URL, formData).subscribe(
-          res => {
-            this.toast.setMessage('photo Added Successfully', 'success');
-            this.router.navigate(['/userlist']);
-          },
-          error => this.toast.setMessage('something wrong', 'danger')
-        );
+
+      let promise = new Promise((resolve, reject) => {
+      
+        this.userService.addPhoto(URL, formData,this.registerForm.value)
+          .toPromise()
+          .then(
+            res => { // Success
+              this.toast.setMessage('photo Added Successfully', 'success');
+              this.router.navigate(['/userlist']);
+            },
+            error => this.toast.setMessage('email already exists', 'danger')
+          );
+      });
+      return promise;
+        
     }
-   }
+  
 
     // this.userService.register(this.registerForm.value).subscribe(
     //   res => {
