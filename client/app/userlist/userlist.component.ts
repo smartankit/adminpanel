@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit,NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
@@ -36,7 +36,7 @@ export class UserListComponent implements OnInit {
     this.roleService.getRoles().subscribe(
       data => this.roles = data,
       error => console.log(error),
-     // () => this.isLoading = false
+      () => this.isLoading = false
     );
   }
 

@@ -53,7 +53,10 @@
               <td>{{user.username}}</td>
               <td>{{user.email}}</td>
               <td>{{user.role}}</td>
+              <td  *ngIf="user.filename; else elseBlock"><img alt="image" width="80" src="assets/uploads/{{user.filename}}">
+               
               <td>
+                  <ng-template #elseBlock><img alt="image" width="80" src="assets/images/logo.png"></ng-template>
                 <button class="btn btn-sm btn-danger" (click)="deleteUser(user)" [disabled]="auth.currentUser._id === user._id">
               <i class="fa fa-trash"></i>Delete
             </button>
