@@ -1,31 +1,45 @@
-"use strict";
-exports.__esModule = true;
 var multer = require('multer');
-var DIR = './uploads/';
-var upload = multer({ dest: DIR }).single('photo');
+var DIR = './dist/public/assets/uploads/';
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, DIR);
+    },
+    filename: function (req, file, cb) {
+        var originalname = file.originalname;
+        var extension = originalname.split(".");
+        var filename = Date.now() + '.' + extension[extension.length - 1];
+        cb(null, filename);
+    }
+});
+var upload = multer({ dest: DIR,
+    storage: storage
+}).single('photo');
 var path = require('path');
-var BaseCtrl = /** @class */ (function () {
+abstract;
+var BaseCtrl = (function () {
     function BaseCtrl() {
         var _this = this;
+        this.abstract = model;
         this.uploadprofile = function (req, res, next) {
-            var path = '';
-            exports.list = upload(req, res, function (err) {
-                if (err) {
-                    return console.error(err);
-                }
-                console.log(req.file);
-                next(null, { filename: req.file });
-            });
             var obj = new _this.model(req.headers);
-            obj.save(function (err, item) {
-                // 11000 is the code for duplicate key error
-                if (err && err.code === 11000) {
-                    res.sendStatus(400);
-                }
+            var path = '';
+            upload(req, res, function (err) {
                 if (err) {
                     return console.error(err);
                 }
-                res.status(200).json(item);
+                if (req.file) {
+                    obj.filename = req.file.filename;
+                }
+                obj.save(function (err, item) {
+                    // 11000 is the code for duplicate key error
+                    if (err && err.code === 11000) {
+                        res.sendStatus(400);
+                    }
+                    if (err) {
+                        return console.error(err);
+                    }
+                    res.status(200).json(item);
+                });
             });
         };
         // Get all
@@ -36,6 +50,17 @@ var BaseCtrl = /** @class */ (function () {
                 }
                 res.json(docs);
             });
+        };
+        // Get all
+        this.getAllUser = function (req, res) {
+            var page = req.params.page;
+            var perPage = 10, pageno = Math.max(0, page);
+            _this.model.find({}, function (err, docs) {
+                if (err) {
+                    return console.error(err);
+                }
+                res.json(docs);
+            }).limit(perPage).skip(perPage * pageno);
         };
         // Count all
         this.count = function (req, res) {
@@ -135,7 +160,7 @@ var BaseCtrl = /** @class */ (function () {
             });
         };
         // Delete by id
-        this["delete"] = function (req, res) {
+        this.delete = function (req, res) {
             _this.model.findOneAndRemove({ _id: req.params.id }, function (err) {
                 if (err) {
                     return console.error(err);
@@ -145,5 +170,5 @@ var BaseCtrl = /** @class */ (function () {
         };
     }
     return BaseCtrl;
-}());
+})();
 exports["default"] = BaseCtrl;

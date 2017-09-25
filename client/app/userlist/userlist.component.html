@@ -6,8 +6,8 @@
 
 
 
-
-    <div class="card" [@routerTransition]>
+ 
+    <div class="card" [@routerTransition] *ngIf="isLoading  == false">
       <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls class="centerpage" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls class="centerpage" (pageChange)="getPage($event)"></pagination-controls>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 let multer = require('multer');
-var DIR = './dist/assets/uploads/';
+var DIR = './dist/public/assets/uploads/';
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -62,7 +62,16 @@ abstract class BaseCtrl {
       res.json(docs);
     });
   }
-
+ // Get all
+ getAllUser = (req, res) => {
+  var page =req.params.page;
+  var perPage = 10
+  , pageno = Math.max(0,page)
+  this.model.find({}, (err, docs) => {
+    if (err) { return console.error(err); }
+    res.json(docs);
+  }).limit(perPage).skip(perPage * pageno)
+ }
   // Count all
   count = (req, res) => {
     this.model.count((err, count) => {

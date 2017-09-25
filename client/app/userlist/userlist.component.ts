@@ -27,9 +27,9 @@ export class UserListComponent implements OnInit {
   
    //for pagination
     p: number = 1;
-  
+   
     ngOnInit() {
-    this.getUsers();
+    this.getUsers(this.p);
     this.getRoles();
   }
   //get all  user details
@@ -37,7 +37,7 @@ export class UserListComponent implements OnInit {
     this.roleService.getRoles().subscribe(
       data => this.roles = data,
       error => console.log(error),
-      () => this.isLoading = false
+    //  () => this.isLoading = false
     );
   }
 
@@ -49,10 +49,10 @@ export class UserListComponent implements OnInit {
 
     this.order = value;
   }
-
+  
   //get all  user details
-  getUsers() {
-    this.userService.getUsers().subscribe(
+  getUsers(perpage) {
+    this.userService.getUsers(perpage).subscribe(
       data => this.users = data,
       error => console.log(error),
       () => this.isLoading = false
@@ -78,10 +78,14 @@ export class UserListComponent implements OnInit {
     this.userService.deleteUser(user).subscribe(
       data => this.toast.setMessage('user deleted successfully.', 'success'),
       error => console.log(error),
-      () => this.getUsers()
+      () => this.getUsers(this.p)
     );
   }
-
+  getPage(page: number) {
+    console.log(page);
+      this.getUsers(page);
+      
+   }
 
   display: boolean = false;
 

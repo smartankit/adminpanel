@@ -45,8 +45,8 @@ export class UserService {
     return this.http.post('/api/login', JSON.stringify(credentials), this.options);
   }
 
-  getUsers(): Observable<any> {
-    return this.http.get('/api/users',this.options).map(res => res.json()).catch(this.handleError);
+  getUsers(perpage): Observable<any> {
+    return this.http.get(`/api/users/${perpage}`,this.options).map(res => res.json()).catch(this.handleError);
   }
 
   countUsers(): Observable<any> {

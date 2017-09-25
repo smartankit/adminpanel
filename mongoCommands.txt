@@ -1,0 +1,1 @@
+mongoimport -d test -c users < users.json  --jsonArray
