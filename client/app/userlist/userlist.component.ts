@@ -15,11 +15,12 @@ import { MangeroleService } from '../services/mangerole.service';
 export class UserListComponent implements OnInit {
   order: string = 'username';
   reverse: boolean = false;
-  users = [];
-  user = {};
-  selecteduser = [];
+  users:Array<any>= [];
+  user = <any>{};
+  
+  selecteduser:any;
   isLoading = true;
-  roles = [];
+  roles:Array<any>= [];
   constructor(public auth: AuthService,
     public toast: ToastComponent,
     private userService: UserService, private roleService: MangeroleService) { }
@@ -85,7 +86,7 @@ export class UserListComponent implements OnInit {
   display: boolean = false;
 
   showDialog() {
-
+      
     this.display = true;
   }
 

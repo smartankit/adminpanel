@@ -24,7 +24,7 @@ export class SidebarComponent {
 order = 'position';
 ascending = true;
    // order = 'position';
-    constructor(private moduleService: ModuleService,private auth: AuthService) {  }
+    constructor(private moduleService: ModuleService,public auth: AuthService) {  }
     ngOnInit() {
 
             this.moduleService.getrolemodule(this.auth.currentUser.role).subscribe(

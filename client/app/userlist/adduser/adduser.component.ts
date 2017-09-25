@@ -10,7 +10,7 @@ import 'rxjs/add/operator/toPromise';
 import { MangeroleService } from '../../services/mangerole.service';
 
 import {Message,SelectItem} from 'primeng/components/common/api';
-const URL = 'http://localhost:4200/api/addPhoto/';
+
 @Component({
   selector: 'app-adduser',
   templateUrl: './adduser.component.html',
@@ -75,7 +75,7 @@ getRoles() {
     let formData = new FormData();
     let data =this.registerForm.value;
     
-  console.log(formData);
+  
     let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
     console.log("iam+ "+inputEl);
     let fileCount: number = inputEl.files.length;
@@ -89,7 +89,7 @@ getRoles() {
 
       let promise = new Promise((resolve, reject) => {
       
-        this.userService.addPhoto(URL, formData,this.registerForm.value)
+        this.userService.addPhoto(formData,this.registerForm.value)
           .toPromise()
           .then(
             res => { // Success

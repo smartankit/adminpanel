@@ -10,9 +10,11 @@ import {CommonService } from '../../services/common.service';
   styleUrls: ['./editcontent.component.scss']
 })
 export class EditcontentComponent implements OnInit {
+
+  pagedata: any;
   pageForm: FormGroup;
   isLoading = false;
-  pagedata=[];
+ 
   desc: string;
   constructor( private route: ActivatedRoute,public toast: ToastComponent, private fb: FormBuilder, private router: Router, private commonService: CommonService) { }
   ngOnInit() {

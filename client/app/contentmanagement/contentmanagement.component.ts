@@ -14,8 +14,10 @@ export class ContentmanagementComponent implements OnInit {
 
   constructor(public auth: AuthService, private moduleService: ModuleService, public toast: ToastComponent, private commonService: CommonService) { }
   pages = [];
-  pagedata = [];
+ 
+  pagedata: Array<any> = [];
   display = false;
+  isLoading =true;
   ngOnInit() {
     //check user role authentication    
     this.moduleService.checkModule();
@@ -23,7 +25,11 @@ export class ContentmanagementComponent implements OnInit {
 
   }
   getPages() {
-    this.commonService.getPages().subscribe(pages => this.pages = pages);
+    this.commonService.getPages().subscribe(
+      pages => this.pages = pages,
+      error => console.log(error),
+      () => this.isLoading =false
+    )
   }
 
   deletePage(page) {

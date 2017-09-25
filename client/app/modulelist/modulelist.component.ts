@@ -11,8 +11,9 @@ import { routerTransition } from '../router.animations';
 export class ModulelistComponent implements OnInit {
 
   constructor(private moduleService:ModuleService, public toast: ToastComponent) { }
-  modulelist=[];
-  module={}
+  modulelist:Array<any>=[];
+ 
+  module = <any>{};
   isLoading=true;
   isLoadingpop=true;
   ngOnInit() {

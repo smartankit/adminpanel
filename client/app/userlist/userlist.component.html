@@ -7,7 +7,7 @@
 
 
 
-    <div class="card" *ngIf="users.length" [@routerTransition]>
+    <div class="card" [@routerTransition]>
       <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,7 +79,7 @@
   </div>
 </div>
 
-<p-dialog header="User Information" [(visible)]="display" modal="modal" width="500" [responsive]="true">
+<p-dialog *ngIf="display == true" header="User Information" [(visible)]="display" modal="modal" width="500" [responsive]="true">
   
   <div class="card-block table-responsive " [@routerTransition]>
     <table class="table">

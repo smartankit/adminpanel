@@ -6,7 +6,6 @@
     "paths": { "@angular/": ["../node_modules/@angular/"] },
     "sourceMap": true,
     "declaration": false,
-    //"skipLibCheck": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

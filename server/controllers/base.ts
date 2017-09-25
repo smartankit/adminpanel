@@ -1,5 +1,5 @@
 let multer = require('multer');
-var DIR = './client/assets/uploads/';
+var DIR = './dist/assets/uploads/';
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {

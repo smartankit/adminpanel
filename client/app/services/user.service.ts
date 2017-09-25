@@ -25,7 +25,7 @@ export class UserService {
   register(user): Observable<any> {
     return this.http.post('/api/user', JSON.stringify(user), this.options);
   }
-  addPhoto(url,formdata,data): Observable<any> {
+  addPhoto(formdata,data): Observable<any> {
     let headers = new Headers();
     headers.set('Accept', 'application/json');
     for (var property in data) {
@@ -38,7 +38,7 @@ export class UserService {
         }
    
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(url,formdata, options).catch(this.handleError);
+    return this.http.post('/api/addPhoto/',formdata, options).catch(this.handleError);
   }
   
   login(credentials): Observable<any> {
