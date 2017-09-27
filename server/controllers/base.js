@@ -15,7 +15,7 @@ var upload = multer({ dest: DIR,
     storage: storage
 }).single('photo');
 var path = require('path');
-abstract;
+var abstract;
 var BaseCtrl = (function () {
     function BaseCtrl() {
         var _this = this;

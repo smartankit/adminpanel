@@ -7,10 +7,24 @@ import * as path from 'path';
 
 import setRoutes from './routes';
 
+import * as responseTime from 'response-time';
+import * as axios from 'axios';
+import * as redis from 'redis';
 const app = express();
 dotenv.load({ path: '.env' });
-app.set('port', (process.env.PORT || 3000));
 
+
+
+// create a new redis client and connect to our local redis instance
+var client = redis.createClient();
+
+// if an error occurs, print it to the console
+client.on('error', function (err) {
+    console.log("Error " + err);
+});
+
+app.set('port', (process.env.PORT || 3000));
+app.use(responseTime());
 app.use('/', express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,4 +50,4 @@ db.once('open', () => {
 
 });   
 
-export { app };
+export { app,client };
